@@ -43,3 +43,9 @@ Topics used:
     * A function that takes an input of a ship struct and the player's ID and updates that player's score based on how many points that ship was worth
 
 ### Timeline:
+  * 1/2- Have the basic shell implementation and start of user interface implementation completed
+  * 1/5- Debug everything so far
+  * 1/8- Start working on the gameplay and leaderboard as well as connecting the user interface with the basic shell and attempting to implement pipes
+  * 1/10- Debug everything so far, also attempt to implement networking
+  * 1/14- Complete gameplay and interfaces, try to incorporate everything together
+  * 1/15- Final debugging
