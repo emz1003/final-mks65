@@ -33,14 +33,13 @@ Topics used:
 * Leaderboard - Kaitlyn
   * Use file to keep score and display
 
-### Data Structures:
+### Data Structures and Algorithms:
   * Arrays
     * Hold character arrays for the usernames, passwords, and other pieces of user information
     * May be used to construct the game board
   * Structs
     * Label and identify the parts of the board such as a "miss", "hit", and the location of the ships
-
-### Algorithms:
-	*
+  * Score-Keeping Algorithm
+    * A function that takes an input of a ship struct and the player's ID and updates that player's score based on how many points that ship was worth
 
 ### Timeline:
