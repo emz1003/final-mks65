@@ -38,9 +38,16 @@ Topics used:
     * Hold character arrays for the usernames, passwords, and other pieces of user information
     * May be used to construct the game board
   * Structs
-    * Label and identify the parts of the board such as a "miss", "hit", and the location of the ships
-  * Score-Keeping Algorithm
-    * A function that takes an input of a ship struct and the player's ID and updates that player's score based on how many points that ship was worth
+    * Game board
+      * Allows for the identification of the two game boards in each game
+      * Contains arrays to label and identify "miss", "hit", and the location of the ships
+    * Ships
+      * Stores information for and identifies the different ships available
+  * Algorithms
+    * Score-Keeping Algorithm
+      * A search algorithm that uses struct and the player's ID to update play score
+    * Sorting Algorithm
+      * Use qsort from the stdlib library to quicksort the arrays of coordinates ("hit", "miss", locations of ships) for ease of displaying the game board
 
 ### Timeline: (The task listed on each day should be completed by that day)
   * 1/2- Have the basic shell implementation and start of user interface implementation completed
