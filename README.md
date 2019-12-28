@@ -8,7 +8,7 @@ Project: Create a simple program where users can log in to play and join battles
 * Empty input would trigger a prompt to remind users that they can use the help keyword to find the available keywords for use
 * Users will be able to navigate with the shell to create a room, join a game, and to play
 * Gameplay will similarly be controlled by the shell: users will be able to navigate the game board through coordinates and keywords
-#### note: interesting further implementation could include setting a default game setup for users and creating an interface so that users can easily place their ships using arrow keys.
+#### Note: interesting further implementation could include setting a default game setup for users and creating an interface so that users can easily place their ships using arrow keys.
 
 ### Technical Design:
 Topics used:
@@ -18,6 +18,7 @@ Topics used:
 * Pipes will be used for 2 users playing a game (further implementation could be allowing other users to watch a game in progress)
 * Signals to block people accidentally using ctrl-C to quit the program. The “exit” keyword will end the program.
 * Networking???
+
 ### Task Delegation:
 * Basic shell implementation - Kaitlyn
   * creating/joining games
@@ -28,13 +29,18 @@ Topics used:
   * authentication
   * using shared memory
 * Gameplay:
-  * gaming shell & board - emily
-* Leaderboard
+  * gaming shell & board - Emily
+* Leaderboard - Kaitlyn
   * Use file to keep score and display
 
-Data Structures:
-	Usage/Application:
-Algorithms:
-	Usage/Application:
-Timeline:
+### Data Structures:
+  * Arrays
+    * Hold character arrays for the usernames, passwords, and other pieces of user information
+    * May be used to construct the game board
+  * Structs
+    * Label and identify the parts of the board such as a "miss", "hit", and the location of the ships
 
+### Algorithms:
+	*
+
+### Timeline:
