@@ -8,3 +8,6 @@
 #include <sys/types.h>
 #include <fcntl.h>
 #include <pwd.h>
+
+int createshell();
+int execute(char * line);
