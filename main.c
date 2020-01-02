@@ -2,4 +2,5 @@
 
 int main () {
   createshell();
+  return 0;
 }
