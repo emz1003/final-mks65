@@ -31,7 +31,7 @@ struct coordinate {
 
 struct cell {
   char symbol;
-  coordinate position;
+  struct coordinate position;
 };
 
 //FUNCTION HEADERS
