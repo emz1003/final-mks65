@@ -25,6 +25,8 @@ int execute(char * line){
 
 int createshell(){
     char input[1024];
+    printf("welcome to Battleship!\n");
+    printf("If you're new to this game, type in 'help' to see the list of valid commands!\n");
     while(1) {
         printf("Enter in a command: ");
         fgets(input, sizeof input, stdin);
