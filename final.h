@@ -25,7 +25,7 @@
 
 //STRUCTS
 struct coordinate {
-  char row;
+  int row;
   int col;
 };
 
