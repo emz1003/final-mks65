@@ -36,6 +36,6 @@ struct cell {
 
 //FUNCTION HEADERS
 int createshell();
-void initializeBoard(cell gameBoard[ROWS][COLS]);
-void printBoard(cell gameBoard[ROWS][COLS]);
+void initializeBoard(struct cell gameBoard[ROWS][COLS]);
+void printBoard(struct cell gameBoard[ROWS][COLS]);
 int execute(char * line);
