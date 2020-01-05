@@ -24,9 +24,7 @@ int execute(char * line){
 
 int createshell(){
     char input[1024];
-    int parent = getpid();
-    while(getpid() == parent) {
-        getcwd(path, 256);
+    while() {
         printf("Enter in a command: ", path);
         fgets(input, sizeof input, stdin);
         input[strlen(input) - 1] = '\0';
