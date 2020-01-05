@@ -20,6 +20,7 @@ int execute(char * line){
   } else {
     printf("Command not valid!\n");
   }
+  return 0;
 }
 
 int createshell(){
