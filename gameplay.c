@@ -3,7 +3,7 @@
 void initializeBoard(struct cell gameBoard[ROWS][COLS]){
   for (int i = 0; i < ROWS; i++){
     for (int j = 0; j < COLS; j++) {
-      char asciirow = j + 65;
+      char asciirow = i + 65;
       gameBoard[i][j].symbol = WATER;
       gameBoard[i][j].position.row = asciirow;
       gameBoard[i][j].position.col = j;
