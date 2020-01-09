@@ -1,5 +1,6 @@
 #include "final.h"
 
-int main() {
-    return 0;
+int main (int argc, char *argv[]) {
+  createshell();
+  return 0;
 }
