@@ -46,11 +46,12 @@ struct cell {
 
 struct ship {
   char symbol;
-  short length;
+  int length;
   //char *name;
 };
 //FUNCTION HEADERS
 int createshell();
+void gamePlay();
 void initializeBoard(struct cell gameBoard[ROWS][COLS]);
 void printBoard(struct cell gameBoard[ROWS][COLS]);
 int execute(char * line);
