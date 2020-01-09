@@ -61,6 +61,8 @@ void gamePlay(){
   carrier.length = 5;
   coor1.row = carriercoor[0] - 65;
   coor1.col = carriercoor[1];
+  printf("%d\n", coor1.row);
+  printf("%d\n", coor1.col);
   putShip(gameBoard, carrier, coor1, carrierdirec);
   printBoard(gameBoard);
 }
