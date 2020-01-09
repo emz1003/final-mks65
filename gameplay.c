@@ -28,12 +28,12 @@ void printBoard(struct cell gameBoard[ROWS][COLS]){
 }
 
 void putShip (struct cell gameBoard[ROWS][COLS], struct ship input, struct coordinate position, char* direction){
-  for (i = 0; i < input.length; i++) {
-    if (!strcmp(direction, HORIZONTAL)){
-      gameBoard[position.row][position.col + i].symbol = ship.symbol;
+  for (int i = 0; i < input.length; i++) {
+    if (!strcmp(direction, "HORIZONTAL")){
+      gameBoard[position.row][position.col + i].symbol = input.symbol;
     }
     else { //Would be vertically oriented
-      gameBoard[position.row + i][position.col].symbol = ship.symbol;
+      gameBoard[position.row + i][position.col].symbol = input.symbol;
     }
   }
 }
