@@ -4,8 +4,8 @@ void initializeBoard(struct cell gameBoard[ROWS][COLS]){
   for (int i = 0; i < ROWS; i++){
     for (int j = 0; j < COLS; j++) {
       gameBoard[i][j].symbol = WATER;
-      gameBoard[i][j].position.row = i;
-      gameBoard[i][j].position.col = j;
+      gameBoard[i][j].position.col = i;
+      gameBoard[i][j].position.row = j;
     }
   }
 }
@@ -35,10 +35,10 @@ void printBoard(struct cell gameBoard[ROWS][COLS]){
 void putShip (struct cell gameBoard[ROWS][COLS], struct ship input, struct coordinate position, int direction){
   for (int i = 0; i < input.length; i++) {
     if (direction){
-      gameBoard[position.row][position.col + i].symbol = input.symbol;
+      gameBoard[position.col][position.row + i].symbol = input.symbol;
     }
     else { //Would be horizontally
-      gameBoard[position.row + i][position.col].symbol = input.symbol;
+      gameBoard[position.col + i][position.row].symbol = input.symbol;
     }
   }
 }
@@ -65,8 +65,8 @@ void gamePlay(){
   struct coordinate coor1;
   carrier.symbol = CARRIER;
   carrier.length = CL;
-  coor1.row = carriercoor[0] - 65;
-  coor1.col = carriercoor[1] - 48;
+  coor1.col = carriercoor[0] - 65;
+  coor1.row = carriercoor[1] - 48;
   putShip(gameBoard, carrier, coor1, (int)carrierdirec[0]);
   printBoard(gameBoard);
 }
