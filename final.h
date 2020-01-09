@@ -55,4 +55,4 @@ void gamePlay();
 void initializeBoard(struct cell gameBoard[ROWS][COLS]);
 void printBoard(struct cell gameBoard[ROWS][COLS]);
 int execute(char * line);
-void putShip (struct cell gameBoard[ROWS][COLS], struct ship input, struct coordinate position, char* direction);
+void putShip (struct cell gameBoard[ROWS][COLS], struct ship input, struct coordinate position, int direction);
