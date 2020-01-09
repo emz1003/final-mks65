@@ -12,9 +12,7 @@ int execute(char * line){
   } else if (!strcmp(line, "log in")){
       printf("Logged in!\n");
   } else if(!strcmp(line, "create game")){ //Create gameplay
-      struct cell gameBoard[ROWS][COLS];
-      initializeBoard(gameBoard);
-      printBoard(gameBoard);
+    gamePlay();
   } else if(!strcmp(line, "join game")){
       printf("Joined game!\n");
   } else if(!strcmp(line, "exit")){
