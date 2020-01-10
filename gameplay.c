@@ -4,8 +4,8 @@ void initializeBoard(struct cell gameBoard[ROWS][COLS]){
   for (int i = 0; i < ROWS; i++){
     for (int j = 0; j < COLS; j++) {
       gameBoard[i][j].symbol = WATER;
-      gameBoard[i][j].position.col = i;
-      gameBoard[i][j].position.row = j;
+      gameBoard[i][j].position.row = i;
+      gameBoard[i][j].position.col = j;
     }
   }
 }
@@ -33,12 +33,15 @@ void printBoard(struct cell gameBoard[ROWS][COLS]){
 }
 
 void putShip (struct cell gameBoard[ROWS][COLS], struct ship input, struct coordinate position, int direction){
+  printf("%d\n", direction);
   for (int i = 0; i < input.length; i++) {
-    if (direction){
-      gameBoard[position.col][position.row + i].symbol = input.symbol;
+    if (direction){ //Vertically
+      printf("(%d, %d)\n", position.col + i, position.row);
+      gameBoard[position.row + i][position.col].symbol = input.symbol;
     }
-    else { //Would be horizontally
-      gameBoard[position.col + i][position.row].symbol = input.symbol;
+    else { //Horizontally
+      printf("(%d, %d)\n", position.col, position.row + i);
+      gameBoard[position.row][position.col + i].symbol = input.symbol;
     }
   }
 }
@@ -53,9 +56,9 @@ void addShiptoBoard(struct cell gameBoard[ROWS][COLS], struct ship input, char s
   struct coordinate coor1;
   input.symbol = shipType;
   input.length = shipLength;
-  coor1.col = coor[0] - 65;
-  coor1.row = coor[1] - 48;
-  putShip(gameBoard, input, coor1, (int)direc[0]);
+  coor1.row = coor[0] - 65;
+  coor1.col = coor[1] - 48;
+  putShip(gameBoard, input, coor1, (int)direc[0] - 48);
   printBoard(gameBoard);
   printf("\n");
 }
