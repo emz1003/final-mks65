@@ -20,14 +20,13 @@ int execute(char * line){
   } else {
     printf("Command not valid!\n");
   }
+  return 0;
 }
 
 int createshell(){
     char input[1024];
-    int parent = getpid();
-    while(getpid() == parent) {
-        getcwd(path, 256);
-        printf("Enter in a command: ", path);
+    while(1) {
+        printf("Enter in a command: ");
         fgets(input, sizeof input, stdin);
         input[strlen(input) - 1] = '\0';
         if(execute(input)){
