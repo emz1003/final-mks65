@@ -43,6 +43,23 @@ void putShip (struct cell gameBoard[ROWS][COLS], struct ship input, struct coord
   }
 }
 
+void addShiptoBoard(struct cell gameBoard[ROWS][COLS], struct ship input, char shipType, int shipLength){
+  printf("Coordinate: ");
+  char coor[10];
+  char direc[10];
+  fgets(coor, sizeof coor, stdin);
+  printf("Direction: ");
+  fgets(direc, sizeof direc, stdin);
+  struct coordinate coor1;
+  input.symbol = shipType;
+  input.length = shipLength;
+  coor1.col = coor[0] - 65;
+  coor1.row = coor[1] - 48;
+  putShip(gameBoard, input, coor1, (int)direc[0]);
+  printBoard(gameBoard);
+  printf("\n");
+}
+
 void gamePlay(){
   struct cell gameBoard[ROWS][COLS]; //main gameboard
   initializeBoard(gameBoard);
@@ -53,20 +70,17 @@ void gamePlay(){
   printf("If you're going vertically, enter in the highest coordinate of where you want your ship to be.\n");
   printf("\n");
 
+  //place all the ships down
+  struct ship carrier;
+  struct ship battleship;
+  struct ship cruiser;
+  struct ship submarine;
+  struct ship destroyer;
   printf("Place your carrier! Ship length: 5. Enter in the coordinate in this format: A2\n");
   printf("Enter in the direction in this format: 0 for Horizontal and 1 for Vertical\n");
-  printf("Coordinate: ");
-  char carriercoor[10];
-  char carrierdirec[10];
-  fgets(carriercoor, sizeof carriercoor, stdin);
-  printf("Direction: ");
-  fgets(carrierdirec, sizeof carrierdirec, stdin);
-  struct ship carrier;
-  struct coordinate coor1;
-  carrier.symbol = CARRIER;
-  carrier.length = CL;
-  coor1.col = carriercoor[0] - 65;
-  coor1.row = carriercoor[1] - 48;
-  putShip(gameBoard, carrier, coor1, (int)carrierdirec[0]);
-  printBoard(gameBoard);
+  addShiptoBoard(gameBoard, carrier, CARRIER, CL);
+  addShiptoBoard(gameBoard, battleship, BATTLESHIP, BL);
+  addShiptoBoard(gameBoard, cruiser, CRUISER, CR);
+  addShiptoBoard(gameBoard, submarine, SUBMARINE, SL);
+  addShiptoBoard(gameBoard, destroyer, DESTROYER, DL);
 }
