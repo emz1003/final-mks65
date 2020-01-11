@@ -33,14 +33,11 @@ void printBoard(struct cell gameBoard[ROWS][COLS]){
 }
 
 void putShip (struct cell gameBoard[ROWS][COLS], struct ship input, struct coordinate position, int direction){
-  printf("%d\n", direction);
   for (int i = 0; i < input.length; i++) {
     if (direction){ //Vertically
-      printf("(%d, %d)\n", position.col + i, position.row);
       gameBoard[position.row + i][position.col].symbol = input.symbol;
     }
     else { //Horizontally
-      printf("(%d, %d)\n", position.col, position.row + i);
       gameBoard[position.row][position.col + i].symbol = input.symbol;
     }
   }
@@ -69,6 +66,7 @@ void gamePlay(){
   printBoard(gameBoard);
   printf("\n");
   printf("Now, place your ships! Enter in a coordinate pair (row, column) of where you want your ship to start.\n");
+  printf("\n");
   printf("If you're going horizontally, enter in the leftmost coordinate of where you want your ship to be.\n");
   printf("If you're going vertically, enter in the highest coordinate of where you want your ship to be.\n");
   printf("\n");
@@ -82,8 +80,16 @@ void gamePlay(){
   printf("Place your carrier! Ship length: 5. Enter in the coordinate in this format: A2\n");
   printf("Enter in the direction in this format: 0 for Horizontal and 1 for Vertical\n");
   addShiptoBoard(gameBoard, carrier, CARRIER, CL);
+  printf("Place your battleship! Ship length: 4. Enter in the coordinate in this format: A2\n");
+  printf("Enter in the direction in this format: 0 for Horizontal and 1 for Vertical\n");
   addShiptoBoard(gameBoard, battleship, BATTLESHIP, BL);
+  printf("Place your cruiser! Ship length: 3. Enter in the coordinate in this format: A2\n");
+  printf("Enter in the direction in this format: 0 for Horizontal and 1 for Vertical\n");
   addShiptoBoard(gameBoard, cruiser, CRUISER, CR);
+  printf("Place your submarine! Ship length: 3. Enter in the coordinate in this format: A2\n");
+  printf("Enter in the direction in this format: 0 for Horizontal and 1 for Vertical\n");
   addShiptoBoard(gameBoard, submarine, SUBMARINE, SL);
+  printf("Place your destroyer! Ship length: 2. Enter in the coordinate in this format: A2\n");
+  printf("Enter in the direction in this format: 0 for Horizontal and 1 for Vertical\n");
   addShiptoBoard(gameBoard, destroyer, DESTROYER, DL);
 }
