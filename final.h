@@ -53,5 +53,6 @@ void gamePlay();
 void initializeBoard(struct cell gameBoard[ROWS][COLS]);
 void printBoard(struct cell gameBoard[ROWS][COLS]);
 int execute(char * line);
-void putShip (struct cell gameBoard[ROWS][COLS], struct ship input, struct coordinate position, int direction);
+int putShip (struct cell gameBoard[ROWS][COLS], struct ship input, struct coordinate position, int direction);
+int isCoorValid(struct cell gameBoard[ROWS][COLS], struct ship input, struct coordinate position, int direction);
 void addShiptoBoard(struct cell gameBoard[ROWS][COLS], struct ship input, char shipType, int shipLength);
