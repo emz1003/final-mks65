@@ -28,7 +28,7 @@ Project: Create a simple program where users can log in to play and join battles
 
 1/11/20
 * Kaitlyn: To make sure that the coordinates the user inputs to place the ships are valid, I created the function isCoorValid. Tested it with the rest of the functions in gameplay.c and it works!
-
+* Kaitlyn: Created the main gameBoard, formatted the game to print both your board and the main board together.
 ### Features:
 
 ### Attempted:

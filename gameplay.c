@@ -93,9 +93,9 @@ void addShiptoBoard(struct cell gameBoard[ROWS][COLS], struct ship input, char s
 }
 
 void gamePlay(){
-  struct cell gameBoard[ROWS][COLS]; //main gameboard
-  initializeBoard(gameBoard);
-  printBoard(gameBoard);
+  struct cell yourBoard[ROWS][COLS]; //your board
+  initializeBoard(yourBoard);
+  printBoard(yourBoard);
   printf("\n");
   printf("Now, place your ships! Enter in a coordinate pair of where you want your ship to start.\n");
   printf("\n");
@@ -111,17 +111,26 @@ void gamePlay(){
   struct ship destroyer;
   printf("Place your carrier! Ship length: 5. Enter in the coordinate in this format: A2\n");
   printf("Enter in the direction in this format: 0 for Horizontal and 1 for Vertical\n");
-  addShiptoBoard(gameBoard, carrier, CARRIER, CL);
+  addShiptoBoard(yourBoard, carrier, CARRIER, CL);
   printf("Place your battleship! Ship length: 4. Enter in the coordinate in this format: A2\n");
   printf("Enter in the direction in this format: 0 for Horizontal and 1 for Vertical\n");
-  addShiptoBoard(gameBoard, battleship, BATTLESHIP, BL);
+  addShiptoBoard(yourBoard, battleship, BATTLESHIP, BL);
   printf("Place your cruiser! Ship length: 3. Enter in the coordinate in this format: A2\n");
   printf("Enter in the direction in this format: 0 for Horizontal and 1 for Vertical\n");
-  addShiptoBoard(gameBoard, cruiser, CRUISER, CR);
+  addShiptoBoard(yourBoard, cruiser, CRUISER, CR);
   printf("Place your submarine! Ship length: 3. Enter in the coordinate in this format: A2\n");
   printf("Enter in the direction in this format: 0 for Horizontal and 1 for Vertical\n");
-  addShiptoBoard(gameBoard, submarine, SUBMARINE, SL);
+  addShiptoBoard(yourBoard, submarine, SUBMARINE, SL);
   printf("Place your destroyer! Ship length: 2. Enter in the coordinate in this format: A2\n");
   printf("Enter in the direction in this format: 0 for Horizontal and 1 for Vertical\n");
-  addShiptoBoard(gameBoard, destroyer, DESTROYER, DL);
+  addShiptoBoard(yourBoard, destroyer, DESTROYER, DL);
+
+  //introduce the actual gameBoard, start the game
+  struct cell gameBoard[ROWS][COLS]; //main game board
+  printf("Your Game Board:\n");
+  printBoard(yourBoard);
+  printf("Main Game Board:\n");
+  printBoard(gameBoard);
+  printf("Now, make your first move! Enter in a coordinate you want to hit in this format: A2");
+  
 }
