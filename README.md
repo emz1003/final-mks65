@@ -34,7 +34,7 @@ Project: Create a simple program where users can log in to play and join battles
 * Kaitlyn: Main board is created correctly
 * Kaitlyn: Coded the function hitTarget, which makes a target either a hit or a miss
 * Kaitlyn: Also made hitTarget check if the coordinate entered was valid
-* Kaitlyn: Tested everything, it works!
+* Kaitlyn: Tested everything, but it doesn't work. Must work on it tomorrow.
 ### Features:
 
 ### Attempted:
