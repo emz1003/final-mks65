@@ -92,6 +92,32 @@ void addShiptoBoard(struct cell gameBoard[ROWS][COLS], struct ship input, char s
   printf("\n");
 }
 
+void hitTarget(struct cell gameBoard[ROWS][COLS]){
+  while(1){
+    printf("Coordinate: ");
+    char coor[10];
+    fgets(coor, sizeof coor, stdin);
+    struct coordinate position;
+    position.row = coor[0] - 65;
+    position.col = coor[1] - 48;
+    if(position.row >= 0 && position.row <= 9 && position.col >= 0 && position.col <= 9){ //checks to see if coordinate entered is within range
+      if(gameBoard[position.row][position.col].symbol == WATER){
+        gameBoard[position.row][position.col].symbol == MISS;
+        printBoard(gameBoard);
+        printf("MISS\n");
+        break;
+      }
+      else if(gameBoard[position.row][position.col].symbol == HIT || gameBoard[position.row][position.col].symbol == MISS){
+        printf("This Coordinate Was Already Targeted! Try Again.\n");
+      }
+    }
+    else {
+      printf("Coordinate Not Valid! Try Again.\n");
+    }
+  }
+  printBoard(gameBoard);
+  printf("\n");;
+}
 void gamePlay(){
   struct cell yourBoard[ROWS][COLS]; //your board
   initializeBoard(yourBoard);
@@ -126,11 +152,14 @@ void gamePlay(){
   addShiptoBoard(yourBoard, destroyer, DESTROYER, DL);
 
   //introduce the actual gameBoard, start the game
-  struct cell gameBoard[ROWS][COLS]; //main game board
+  struct cell mainBoard[ROWS][COLS]; //main game board
   printf("Your Game Board:\n");
   printBoard(yourBoard);
   printf("Main Game Board:\n");
-  printBoard(gameBoard);
-  printf("Now, make your first move! Enter in a coordinate you want to hit in this format: A2");
-  
+  printBoard(mainBoard);
+  printf("\n");
+  //hitting and missing starts
+  printf("Now, make your first move! Enter in a coordinate you want to hit in this format: A2\n");
+  hitTarget(gameBoard);
+  hitTarget(gameBoard);
 }
