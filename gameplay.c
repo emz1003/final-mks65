@@ -160,6 +160,6 @@ void gamePlay(){
   printf("\n");
   //hitting and missing starts
   printf("Now, make your first move! Enter in a coordinate you want to hit in this format: A2\n");
-  hitTarget(gameBoard);
-  hitTarget(gameBoard);
+  hitTarget(mainBoard);
+  hitTarget(mainBoard);
 }
