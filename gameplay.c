@@ -102,21 +102,26 @@ void hitTarget(struct cell gameBoard[ROWS][COLS]){
     position.col = coor[1] - 48;
     if(position.row >= 0 && position.row <= 9 && position.col >= 0 && position.col <= 9){ //checks to see if coordinate entered is within range
       if(gameBoard[position.row][position.col].symbol == WATER){
-        gameBoard[position.row][position.col].symbol == MISS;
+        gameBoard[position.row][position.col].symbol = MISS;
         printBoard(gameBoard);
         printf("MISS\n");
+        break;
+      }
+      else if(gameBoard[position.row][position.col].symbol == CARRIER || gameBoard[position.row][position.col].symbol == BATTLESHIP || gameBoard[position.row][position.col].symbol == CRUISER || gameBoard[position.row][position.col].symbol == SUBMARINE || gameBoard[position.row][position.col].symbol == DESTROYER){
+        gameBoard[position.row][position.col].symbol = HIT;
+        printBoard(gameBoard);
+        printf("HIT\n");
         break;
       }
       else if(gameBoard[position.row][position.col].symbol == HIT || gameBoard[position.row][position.col].symbol == MISS){
         printf("This Coordinate Was Already Targeted! Try Again.\n");
       }
     }
-    else {
+    else { //if coordinate not valid, ask for another one
       printf("Coordinate Not Valid! Try Again.\n");
     }
   }
-  printBoard(gameBoard);
-  printf("\n");;
+
 }
 void gamePlay(){
   struct cell yourBoard[ROWS][COLS]; //your board
@@ -153,6 +158,7 @@ void gamePlay(){
 
   //introduce the actual gameBoard, start the game
   struct cell mainBoard[ROWS][COLS]; //main game board
+  initializeBoard(mainBoard);
   printf("Your Game Board:\n");
   printBoard(yourBoard);
   printf("Main Game Board:\n");

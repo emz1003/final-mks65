@@ -35,6 +35,10 @@ Project: Create a simple program where users can log in to play and join battles
 * Kaitlyn: Coded the function hitTarget, which makes a target either a hit or a miss
 * Kaitlyn: Also made hitTarget check if the coordinate entered was valid
 * Kaitlyn: Tested everything, but it doesn't work. Must work on it tomorrow.
+
+1/13/20
+* Kaitlyn: After lots of debugging, the hitTarget works! Works great with the mainboard. Next steps: look at pipes for a two player game!
+
 ### Features:
 
 ### Attempted:
