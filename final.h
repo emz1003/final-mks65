@@ -8,6 +8,9 @@
 #include <sys/types.h>
 #include <fcntl.h>
 #include <pwd.h>
+#include <sys/ipc.h>
+#include <sys/sem.h>
+#include <sys/shm.h>
 
 union semun {
     int val;               /* Value for SETVAL */
@@ -29,7 +32,9 @@ union semun {
 #define CRUISER 'r'
 #define SUBMARINE 's'
 #define DESTROYER 'd'
-#define KEY 847713
+#define SEMKEY 84771
+#define SHMKEY 84772
+#define SHM_SIZE 1048576
 
 //#define HORIZONTAL 0
 //#define VERTICAL 1
@@ -45,6 +50,11 @@ union semun {
 struct coordinate {
   int row;
   int col;
+};
+
+struct user_info {
+  char * usr;
+  char * pwd;
 };
 
 struct cell {
