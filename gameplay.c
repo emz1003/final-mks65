@@ -69,6 +69,17 @@ int isCoorValid(struct cell gameBoard[ROWS][COLS], struct ship input, struct coo
   }
   return 1; //coordinate valid!
 }
+
+int isWin (struct cell gameBoard[ROWS][COLS]){ //returns true if no one won yet, 0 if someone won
+  for (int i = 0; i < ROWS; i++){
+    for (int j = 0; j < COLS; j++) {
+      if(gameBoard[i][j].symbol == CARRIER || gameBoard[i][j].symbol == BATTLESHIP || gameBoard[i][j].symbol == CRUISER || gameBoard[i][j].symbol == SUBMARINE || gameBoard[i][j].symbol == DESTROYER){
+        return 1;
+      }
+    }
+  }
+  return 0;
+}
 void addShiptoBoard(struct cell gameBoard[ROWS][COLS], struct ship input, char shipType, int shipLength){
   while (1){
     printf("Coordinate: ");
@@ -121,8 +132,8 @@ void hitTarget(struct cell gameBoard[ROWS][COLS]){
       printf("Coordinate Not Valid! Try Again.\n");
     }
   }
-
 }
+
 void gamePlay(){
   struct cell yourBoard[ROWS][COLS]; //your board
   initializeBoard(yourBoard);
@@ -166,6 +177,19 @@ void gamePlay(){
   printf("\n");
   //hitting and missing starts
   printf("Now, make your first move! Enter in a coordinate you want to hit in this format: A2\n");
-  hitTarget(mainBoard);
-  hitTarget(mainBoard);
+  while (isWin(mainBoard)){ //While no one has won yet...
+    hitTarget(mainBoard); //Keep on the gameplay
+  }
+  printf("Someone won!\n");
+}
+
+void pipes(){
+  int fd;
+  char * playerOne = "/systems/final-mks65/pipes";
+  char * playerTwo = "/systems/final-mks65/pipes";
+  //Creating the neamed file(FIFO)
+  mkfifo(playerOne, 0666);
+  mkfifo(playerTwo, 0666);
+  char hit1[10], hit2[10];
+  while (isWin(mainBoard))
 }

@@ -39,6 +39,10 @@ Project: Create a simple program where users can log in to play and join battles
 1/13/20
 * Kaitlyn: After lots of debugging, the hitTarget works! Works great with the mainboard. Next steps: look at pipes for a two player game!
 
+1/14/20
+* Kaitlyn: Coded the isWin function to see when the game will end, looked at pipes to start coding that
+
+
 ### Features:
 
 ### Attempted:
