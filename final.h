@@ -6,6 +6,7 @@
 #include <errno.h>
 #include <dirent.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <fcntl.h>
 #include <pwd.h>
 
@@ -57,4 +58,5 @@ int putShip (struct cell gameBoard[ROWS][COLS], struct ship input, struct coordi
 int isCoorValid(struct cell gameBoard[ROWS][COLS], struct ship input, struct coordinate position, int direction);
 void addShiptoBoard(struct cell gameBoard[ROWS][COLS], struct ship input, char shipType, int shipLength);
 int isWin (struct cell gameBoard[ROWS][COLS]);
-void hitTarget(struct cell gameBoard[ROWS][COLS], struct coordinate position);
+int hitTarget(struct cell gameBoard[ROWS][COLS], struct coordinate position);
+void makemove(struct cell yourBoard[ROWS][COLS], struct cell mainBoard[ROWS][COLS]);
