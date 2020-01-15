@@ -103,14 +103,8 @@ void addShiptoBoard(struct cell gameBoard[ROWS][COLS], struct ship input, char s
   printf("\n");
 }
 
-void hitTarget(struct cell gameBoard[ROWS][COLS]){
+void hitTarget(struct cell gameBoard[ROWS][COLS], struct coordinate position){
   while(1){
-    printf("Coordinate: ");
-    char coor[10];
-    fgets(coor, sizeof coor, stdin);
-    struct coordinate position;
-    position.row = coor[0] - 65;
-    position.col = coor[1] - 48;
     if(position.row >= 0 && position.row <= 9 && position.col >= 0 && position.col <= 9){ //checks to see if coordinate entered is within range
       if(gameBoard[position.row][position.col].symbol == WATER){
         gameBoard[position.row][position.col].symbol = MISS;
@@ -183,13 +177,54 @@ void gamePlay(){
   printf("Someone won!\n");
 }
 
-void pipes(){
+void pipes(struct cell gameBoard[ROWS][COLS]){
   int fd;
   char * playerOne = "/systems/final-mks65/pipes";
   char * playerTwo = "/systems/final-mks65/pipes";
   //Creating the neamed file(FIFO)
-  mkfifo(playerOne, 0666);
-  mkfifo(playerTwo, 0666);
+  mkfifo(playerOne, 0666); //reads from playerTwo
+  mkfifo(playerTwo, 0666); //reads from playerOne
   char hit1[10], hit2[10];
-  while (isWin(mainBoard))
+  while (isWin(gameBoard)){
+    int semd;
+    int shmd;
+    //setting up the semaphore
+    semd = semget(KEY, 1, IPC_CREAT | IPC_EXCL | 0644);
+    if (semd == -1) {
+     printf("error %d: %s\n", errno, strerror(errno));
+     semd = semget(KEY, 1, 0);
+     v = semctl(semd, 0, GETVAL, 0);
+     printf("semaphore created\n");
+    }
+    else {
+     union semun us;
+     us.val = 1;
+     r = semctl(semd, 0, SETVAL, us);
+     printf("semaphore created\n");
+   }
+    shmd = shmget(KEY, 1, 0);
+    //waiting
+    printf("waiting for the player to make move\n");
+    struct sembuf sb;
+    sb.sem_num = 0;
+    sb.sem_op = -1;
+    semop(semd, &sb, 1);
+
+    //code to continue the gameplay
+    if(player == 1){ //player 1's turn
+      fd = open(playerOne, O_WRONLY);
+      printf("Coordinate: ");
+      fgets(hit1, sizeof hit1, stdin);
+      struct coordinate position;
+      position.row = coor[0] - 65;
+      position.col = coor[1] - 48;
+      write(fd, hit1, strlen(hit1 + 1));
+      close(fd);
+    }
+
+    //end of waiiting
+    sb.sem_op = 1;
+    semop(semd, &sb, 1);
+    shmdt(mem);
+  }
 }
