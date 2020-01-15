@@ -12,13 +12,13 @@
 #include <sys/sem.h>
 #include <sys/shm.h>
 
-union semun {
-    int val;               /* Value for SETVAL */
-    struct semid_ds *buf;  /* Buffer for IPC_STAT, IPC_SET */
-    unsigned short *array; /* Array for GETALL, SETALL */
-    struct seminfo *__buf; /* Buffer for IPC_INFO
-                              (Linux-specific) */
-};
+// union semun {
+//     int val;               /* Value for SETVAL */
+//     struct semid_ds *buf;  /* Buffer for IPC_STAT, IPC_SET */
+//     unsigned short *array; /* Array for GETALL, SETALL */
+//     struct seminfo *__buf; /* Buffer for IPC_INFO
+//                               (Linux-specific) */
+// };
 //CONSTANTS
 #define ROWS 10
 #define COLS 10
@@ -55,6 +55,7 @@ struct coordinate {
 struct user_info {
   char * usr;
   char * pwd;
+  int *is_active;
 };
 
 struct cell {
@@ -74,3 +75,7 @@ void initializeBoard(struct cell gameBoard[ROWS][COLS]);
 void printBoard(struct cell gameBoard[ROWS][COLS]);
 int execute(char * line);
 void putShip (struct cell gameBoard[ROWS][COLS], struct ship input, struct coordinate position, char* direction);
+int create_db();
+int signup(char * usr, char *pwd);
+int login(char * usr);
+int logout(char * usr);

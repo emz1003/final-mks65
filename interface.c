@@ -24,32 +24,93 @@ int create_db() {
     }
     printf("shared memory created\n");
 
-    semd = semget(SEMKEY, 1, 0);
+    semid = semget(SEMKEY, 1, 0);
     struct sembuf sb;
     sb.sem_num = 0;
     sb.sem_op = -1;
     sb.sem_flg = SEM_UNDO;
-    semop(semd, &sb, 1);
-    shmid = shmget(MEMKEY, SEG_SIZE, 0);
+    semop(semid, &sb, 1);
+    shmid = shmget(SHMKEY, SHM_SIZE, 0);
 
-    struct user_info ** db = shmat(shmid, NULL, 0);
+    struct user_info * db = shmat(shmid, NULL, 0);
     shmdt(db);
     sb.sem_op = 1;
     semop(semid, &sb, 1);
+    return 0;
 }
 
-// int signup(char * usr, char * pwd) {
+int signup(char * usr, char * pwd) {
+    int semid = semget(SEMKEY, 1, 0);
+    struct sembuf sb;
+    sb.sem_num = 0;
+    sb.sem_op = -1;
+    sb.sem_flg = SEM_UNDO;
+    semop(semid, &sb, 1);
+    int shmid = shmget(SHMKEY, SHM_SIZE, 0);
+    struct user_info *db = shmat(shmid, 0, 0);
 
-// }
+    while(db){
+        if(!strcmp(db->usr, usr)){
+            printf("user name taken\n");
+            return 1;
+        }
+        db++;
+    }
 
-// int login() {
+    db->usr = usr;
+    db->pwd = pwd;
+    db->is_active = 0;
 
-// }
+    shmdt(db);
+    sb.sem_op = 1;
+    semop(semid, &sb, 1);
+    return 0;
+}
 
-// int logout() {
+int login(char * usr) {
+    int semid = semget(SEMKEY, 1, 0);
+    struct sembuf sb;
+    sb.sem_num = 0;
+    sb.sem_op = -1;
+    sb.sem_flg = SEM_UNDO;
+    semop(semid, &sb, 1);
+    int shmid = shmget(SHMKEY, SHM_SIZE, 0);
+    struct user_info *db = shmat(shmid, 0, 0);
 
-// }
+    while(db->usr) {
+        if(!strcmp(db->usr, usr)){
+            *db->is_active = 1;
+            break;
+        }
+        db++;
+    }
 
-// int generate_id() {
+    shmdt(db);
+    sb.sem_op = 1;
+    semop(semid, &sb, 1);
+    return 0;
+}
 
-// }
+int logout(char * usr) {
+    int semid = semget(SEMKEY, 1, 0);
+    struct sembuf sb;
+    sb.sem_num = 0;
+    sb.sem_op = -1;
+    sb.sem_flg = SEM_UNDO;
+    semop(semid, &sb, 1);
+    int shmid = shmget(SHMKEY, SHM_SIZE, 0);
+    struct user_info * db = shmat(shmid, 0, 0);
+
+    while(db->usr) {
+        if(!strcmp(db->usr, usr)){
+            *db->is_active = 0;
+            break;
+        }
+        db++;
+    }
+
+    shmdt(db);
+    sb.sem_op = 1;
+    semop(semid, &sb, 1);
+    return 0;
+}
