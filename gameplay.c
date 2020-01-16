@@ -176,50 +176,54 @@ void gamePlay(){
 
 void makemove(struct cell yourBoard[ROWS][COLS], struct cell mainBoard[ROWS][COLS]){
   int fd;
-  char * playerMove = "/systems/final-mks65/pipes";
+  int fd2 = fork();
+  int whoseturn = 0; //0 for player one, 1 for player two
+  char * playerOne = "/systems/final-mks65/pipes";
+  char * playerTwo = "/systems/final-mks65/pipes";
   //Creating the named file(FIFO)
-  mkfifo(playerMove, 0666); //reads moves
+  mkfifo(playerOne, 0666); //reads playerTwo moves
+  mkfifo(playerTwo, 0666); //reads playerOne moves
   char hit1[10], hit2[10];
   while (isWin(mainBoard)){
-    //code to send over a coordinate
-    fd = open(playerMove, O_WRONLY);
-    printf("Coordinate: ");
-    fgets(hit1, sizeof(hit1), stdin);
-    write(fd, hit1, strlen(hit1 + 1));
-    close(fd);
+      //code to send over a coordinate
+      fd = open(playerMove, O_WRONLY);
+      printf("Coordinate: ");
+      fgets(hit1, sizeof(hit1), stdin);
+      write(fd, hit1, strlen(hit1 + 1));
+      close(fd);
 
-    //other end reads from pipe, marks whether hit or miss
-    fd = open(playerMove, O_RDONLY);
-    read (fd, hit2, sizeof(hit2));
-    close(fd);
-    struct coordinate position;
-    position.row = hit2[0] - 65;
-    position.col = hit2[1] - 48;
-    int move = hitTarget(yourBoard, position);
+      //other end reads from pipe, marks whether hit or miss
+      fd = open(playerMove, O_RDONLY);
+      read (fd, hit2, sizeof(hit2));
+      close(fd);
+      struct coordinate position;
+      position.row = hit2[0] - 65;
+      position.col = hit2[1] - 48;
+      int move = hitTarget(yourBoard, position);
 
-    //sends back the coordinate and whether it's a hit or miss
-    fd = open(playerMove, O_WRONLY);
-    if(move == 1){ //if miss
-      strcat(hit2, "1");
-      write(fd, hit2, strlen(hit2 + 1));
-    }
-    if(move == 2){ //if hit
-      strcat(hit2, "2");
-      write(fd, hit2, strlen(hit2 + 1));
-    }
-    close(fd);
+      //sends back the coordinate and whether it's a hit or miss
+      fd = open(playerMove, O_WRONLY);
+      if(move == 1){ //if miss
+        strcat(hit2, "1");
+        write(fd, hit2, strlen(hit2 + 1));
+      }
+      if(move == 2){ //if hit
+        strcat(hit2, "2");
+        write(fd, hit2, strlen(hit2 + 1));
+      }
+      close(fd);
 
-    //finally, take that coordinate and mark down whether you got a hit or miss
-    fd = open(playerMove, O_RDONLY);
-    read(fd, hit1, sizeof(hit1));
-    close(fd);
-    if(hit1[3] == '1'){
-      mainBoard[hit1[0]][hit1[1]].symbol = MISS;
-      printBoard(mainBoard);
-    }
-    if(hit1[3] == '2'){
-      mainBoard[hit1[0]][hit1[1]].symbol = HIT;
-      printBoard(mainBoard);
-    }
+      //finally, take that coordinate and mark down whether you got a hit or miss
+      fd = open(playerMove, O_RDONLY);
+      read(fd, hit1, sizeof(hit1));
+      close(fd);
+      if(hit1[3] == '1'){
+        mainBoard[hit1[0]][hit1[1]].symbol = MISS;
+        printBoard(mainBoard);
+      }
+      if(hit1[3] == '2'){
+        mainBoard[hit1[0]][hit1[1]].symbol = HIT;
+        printBoard(mainBoard);
+      }
   }
 }
