@@ -67,7 +67,7 @@ int signup(char * usr, char * pwd) {
     return 0;
 }
 
-int login(char * usr) {
+int login(char * usr, char * pwd) {
     int semid = semget(SEMKEY, 1, 0);
     struct sembuf sb;
     sb.sem_num = 0;
@@ -76,11 +76,15 @@ int login(char * usr) {
     semop(semid, &sb, 1);
     int shmid = shmget(SHMKEY, SHM_SIZE, 0);
     struct user_info *db = shmat(shmid, 0, 0);
+    int is_auth = 0;
 
     while(db->usr) {
         if(!strcmp(db->usr, usr)){
-            *db->is_active = 1;
-            break;
+            if(!strcmp(db->pwd, pwd)) {
+                *db->is_active = 1;
+                is_auth = 1;
+                break;
+            }
         }
         db++;
     }
@@ -88,7 +92,9 @@ int login(char * usr) {
     shmdt(db);
     sb.sem_op = 1;
     semop(semid, &sb, 1);
-    return 0;
+    if(is_auth)
+        return 0;
+    return 1;
 }
 
 int logout(char * usr) {

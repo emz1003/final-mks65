@@ -77,5 +77,5 @@ int execute(char * line);
 void putShip (struct cell gameBoard[ROWS][COLS], struct ship input, struct coordinate position, char* direction);
 int create_db();
 int signup(char * usr, char *pwd);
-int login(char * usr);
+int login(char * usr, char *pwd);
 int logout(char * usr);
