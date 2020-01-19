@@ -10,12 +10,6 @@ void initializeBoard(struct cell gameBoard[ROWS][COLS]){
   }
 }
 
-//initialize the four boards of the game
-struct cell playerOneBoard[ROWS][COLS]; //playerOne's board
-struct cell playerOneMain[ROWS][COLS]; //playerOne's main game board
-struct cell playerTwoBoard[ROWS][COLS]; //playerOne's main game board
-struct cell playerTwoMain[ROWS][COLS]; //playerOne's main game board
-
 void printBoard(struct cell gameBoard[ROWS][COLS]){
   printf("  0 1 2 3 4 5 6 7 8 9\n");
   for (int i = 0; i < ROWS; i++) {

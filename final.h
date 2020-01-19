@@ -47,6 +47,12 @@ struct ship {
   int length;
 };
 
+//initialize the four boards of the game
+struct cell playerOneBoard[ROWS][COLS]; //playerOne's board
+struct cell playerOneMain[ROWS][COLS]; //playerOne's main game board
+struct cell playerTwoBoard[ROWS][COLS]; //playerOne's main game board
+struct cell playerTwoMain[ROWS][COLS]; //playerOne's main game board
+
 //FUNCTION HEADERS
 int createshell();
 void gamePlay(struct cell ownBoard[ROWS][COLS], struct cell mainBoard[ROWS][COLS]);
