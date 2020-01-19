@@ -137,7 +137,7 @@ int hitTarget(struct cell gameBoard[ROWS][COLS], struct coordinate position){
   }
 }
 
-void gamePlay(struct cell ownBoard, struct cell mainBoard){
+void gamePlay(struct cell ownBoard[ROWS][COLS], struct cell mainBoard[ROWS][COLS]){
   printBoard(ownBoard);
   printf("\n");
   printf("Now, place your ships! Enter in a coordinate pair of where you want your ship to start.\n");
