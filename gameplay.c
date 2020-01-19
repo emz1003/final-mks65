@@ -191,7 +191,7 @@ void playerOne(){
 
     fd = open(playerMove, O_RDONLY);
     while(1){
-      if(read(fd, hit2, sizeof(hit2)) != NULL){
+      if(read(fd, hit2, sizeof(hit2)) >0 ){
           printf("Player Two: %s\n", hit2);
           break;
       }
@@ -207,7 +207,7 @@ void playerTwo(){
   while(1){
     fd2 = open(playerMove, O_RDONLY);
     while(1){
-      if(read(fd2, hit1, sizeof(hit1)) != NULL){
+      if(read(fd2, hit1, sizeof(hit1)) >0){
           printf("Player One: %s\n", hit1);
           break;
       }
