@@ -179,7 +179,7 @@ void gamePlay(struct cell ownBoard[ROWS][COLS], struct cell mainBoard[ROWS][COLS
 
 void playerOne(){
   int fd;
-  char *playerMove = "/systems/final-mks65/pipes";
+  char *playerMove = "pipes/pipe";
   mkfifo(playerMove, 0666);
   char hit1[10], hit2[10];
   while(1){
@@ -197,7 +197,7 @@ void playerOne(){
 }
 void playerTwo(){
   int fd2;
-  char *playerMove = "/systems/final-mks65/pipes";
+  char *playerMove = "pipes/pipe";
   mkfifo(playerMove, 0666);
   char hit1[10], hit2[10];
   while(1){
