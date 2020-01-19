@@ -209,7 +209,7 @@ void playerTwo(){
     fd2 = open(playerMove, O_RDONLY);
     while(1){
       if(read(fd2, hit1, sizeof(hit1)) >0){
-          *strchr(hit1, "\n") = '\0';
+          *strchr(hit1, '\n') = '\0';
           printf("Player One: %s\n", hit1);
           break;
       }
