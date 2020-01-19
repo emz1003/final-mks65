@@ -186,7 +186,7 @@ void playerOne(){
     fd = open(playerMove, O_WRONLY);
     printf("Coordinate: ");
     fgets(hit1, sizeof(hit1), stdin);
-    write(fd, hit1, strlen(hit1 + 1));
+    write(fd, hit1, strlen(hit1));
     close(fd);
 
     fd = open(playerMove, O_RDONLY);
@@ -217,7 +217,7 @@ void playerTwo(){
     fd2 = open(playerMove, O_WRONLY);
     printf("Coordinate: ");
     fgets(hit2, sizeof(hit2), stdin);
-    write(fd2, hit2, strlen(hit2 + 1));
+    write(fd2, hit2, strlen(hit2));
     close(fd2);
   }
 }
