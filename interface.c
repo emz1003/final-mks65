@@ -39,6 +39,10 @@ int create_db() {
     return 0;
 }
 
+int access_db() {
+    
+}
+
 int signup(char * usr, char * pwd) {
     int semid = semget(SEMKEY, 1, 0);
     struct sembuf sb;
@@ -67,7 +71,7 @@ int signup(char * usr, char * pwd) {
     return 0;
 }
 
-int login(char * usr, char * pwd) {
+int signin(char * usr, char * pwd) {
     int semid = semget(SEMKEY, 1, 0);
     struct sembuf sb;
     sb.sem_num = 0;
@@ -97,7 +101,7 @@ int login(char * usr, char * pwd) {
     return 1;
 }
 
-int logout(char * usr) {
+int signout(char * usr) {
     int semid = semget(SEMKEY, 1, 0);
     struct sembuf sb;
     sb.sem_num = 0;
