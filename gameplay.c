@@ -186,8 +186,8 @@ void playerOne(){
     close(fd);
 
     fd = open(playerMove, O_RDONLY);
-    read(fd, hit1, sizeof(hit1));
-    printf("Player Two: %s\n", hit1);
+    read(fd, hit2, sizeof(hit2));
+    printf("Player Two: %s\n", hit2);
     close(fd);
   }
 }
