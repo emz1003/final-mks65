@@ -192,6 +192,7 @@ void playerOne(){
     fd = open(playerMove, O_RDONLY);
     while(1){
       if(read(fd, hit2, sizeof(hit2)) >0 ){
+          strchr(hit2, '\n');
           printf("Player Two: %s\n", hit2);
           break;
       }
@@ -208,6 +209,7 @@ void playerTwo(){
     fd2 = open(playerMove, O_RDONLY);
     while(1){
       if(read(fd2, hit1, sizeof(hit1)) >0){
+          strchr(hit1, '\n');
           printf("Player One: %s\n", hit1);
           break;
       }
