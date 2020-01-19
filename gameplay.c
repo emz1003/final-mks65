@@ -10,6 +10,16 @@ void initializeBoard(struct cell gameBoard[ROWS][COLS]){
   }
 }
 
+//initialize the four boards of the game
+struct cell playerOneBoard[ROWS][COLS]; //playerOne's board
+initializeBoard(playerOneBoard);
+struct cell playerOneMain[ROWS][COLS]; //playerOne's main game board
+initializeBoard(playerOneMain);
+struct cell playerTwoBoard[ROWS][COLS]; //playerOne's main game board
+initializeBoard(playerTwoBoard);
+struct cell playerTwoMain[ROWS][COLS]; //playerOne's main game board
+initializeBoard(playerTwoMain);
+
 void printBoard(struct cell gameBoard[ROWS][COLS]){
   printf("  0 1 2 3 4 5 6 7 8 9\n");
   for (int i = 0; i < ROWS; i++) {
@@ -127,10 +137,8 @@ int hitTarget(struct cell gameBoard[ROWS][COLS], struct coordinate position){
   }
 }
 
-void gamePlay(){
-  struct cell yourBoard[ROWS][COLS]; //your board
-  initializeBoard(yourBoard);
-  printBoard(yourBoard);
+void gamePlay(struct cell ownBoard, struct cell mainBoard){
+  printBoard(ownBoard);
   printf("\n");
   printf("Now, place your ships! Enter in a coordinate pair of where you want your ship to start.\n");
   printf("\n");
@@ -146,25 +154,23 @@ void gamePlay(){
   struct ship destroyer;
   printf("Place your carrier! Ship length: 5. Enter in the coordinate in this format: A2\n");
   printf("Enter in the direction in this format: 0 for Horizontal and 1 for Vertical\n");
-  addShiptoBoard(yourBoard, carrier, CARRIER, CL);
+  addShiptoBoard(ownBoard, carrier, CARRIER, CL);
   printf("Place your battleship! Ship length: 4. Enter in the coordinate in this format: A2\n");
   printf("Enter in the direction in this format: 0 for Horizontal and 1 for Vertical\n");
-  addShiptoBoard(yourBoard, battleship, BATTLESHIP, BL);
+  addShiptoBoard(ownBoard, battleship, BATTLESHIP, BL);
   printf("Place your cruiser! Ship length: 3. Enter in the coordinate in this format: A2\n");
   printf("Enter in the direction in this format: 0 for Horizontal and 1 for Vertical\n");
-  addShiptoBoard(yourBoard, cruiser, CRUISER, CR);
+  addShiptoBoard(ownBoard, cruiser, CRUISER, CR);
   printf("Place your submarine! Ship length: 3. Enter in the coordinate in this format: A2\n");
   printf("Enter in the direction in this format: 0 for Horizontal and 1 for Vertical\n");
-  addShiptoBoard(yourBoard, submarine, SUBMARINE, SL);
+  addShiptoBoard(ownBoard, submarine, SUBMARINE, SL);
   printf("Place your destroyer! Ship length: 2. Enter in the coordinate in this format: A2\n");
   printf("Enter in the direction in this format: 0 for Horizontal and 1 for Vertical\n");
-  addShiptoBoard(yourBoard, destroyer, DESTROYER, DL);
+  addShiptoBoard(ownBoard, destroyer, DESTROYER, DL);
 
   //introduce the actual gameBoard, start the game
-  struct cell mainBoard[ROWS][COLS]; //main game board
-  initializeBoard(mainBoard);
   printf("Your Game Board:\n");
-  printBoard(yourBoard);
+  printBoard(ownBoard);
   printf("Main Game Board:\n");
   printBoard(mainBoard);
   printf("\n");
@@ -183,7 +189,7 @@ void playerOne(){
     printf("Coordinate: ");
     fgets(hit1, sizeof(hit1), stdin);
     write(fd, hit1, strlen(hit1 + 1));
-    close(fd);
+    //close(fd);
 
     fd = open(playerMove, O_RDONLY);
     read(fd, hit2, sizeof(hit2));
@@ -200,7 +206,7 @@ void playerTwo(){
     fd2 = open(playerMove, O_RDONLY);
     read(fd2, hit1, 10);
     printf("Player One 1: %s\n", hit1);
-    close(fd2);
+    //close(fd2);
 
     fd2 = open(playerMove, O_WRONLY);
     printf("Coordinate: ");
