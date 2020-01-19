@@ -59,4 +59,5 @@ int isCoorValid(struct cell gameBoard[ROWS][COLS], struct ship input, struct coo
 void addShiptoBoard(struct cell gameBoard[ROWS][COLS], struct ship input, char shipType, int shipLength);
 int isWin (struct cell gameBoard[ROWS][COLS]);
 int hitTarget(struct cell gameBoard[ROWS][COLS], struct coordinate position);
-void makemove(struct cell yourBoard[ROWS][COLS], struct cell mainBoard[ROWS][COLS]);
+void playerOne();
+void playerTwo();
