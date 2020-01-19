@@ -170,8 +170,7 @@ void gamePlay(){
   printf("\n");
   //hitting and missing starts
   printf("Now, make your first move! Enter in a coordinate you want to hit in this format: A2\n");
-  makemove(yourBoard, mainBoard);
-  printf("Someone won!\n");
+
 }
 
 void playerOne(){
