@@ -187,7 +187,7 @@ void playerOne(){
     printf("Coordinate: ");
     fgets(hit1, sizeof(hit1), stdin);
     write(fd, hit1, strlen(hit1 + 1));
-    //close(fd);
+    close(fd);
 
     fd = open(playerMove, O_RDONLY);
     while(1){
@@ -212,7 +212,7 @@ void playerTwo(){
           break;
       }
     }
-    //close(fd2);
+    close(fd2);
 
     fd2 = open(playerMove, O_WRONLY);
     printf("Coordinate: ");
