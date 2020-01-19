@@ -1,7 +1,7 @@
 #include "final.h"
 
 char *playerMove = "/systems/final-mks65/pipes";
-mkfifo(playerMove, 0666);
+mkfifo(playerMove, 666);
 void initializeBoard(struct cell gameBoard[ROWS][COLS]){
   for (int i = 0; i < ROWS; i++){
     for (int j = 0; j < COLS; j++) {
