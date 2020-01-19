@@ -190,8 +190,12 @@ void playerOne(){
     //close(fd);
 
     fd = open(playerMove, O_RDONLY);
-    read(fd, hit2, sizeof(hit2));
-    printf("Player Two: %s\n", hit2);
+    while(1){
+      if(read(fd, hit2, sizeof(hit2)) != NULL){
+          printf("Player Two: %s\n", hit2);
+          break;
+      }
+    }
     close(fd);
   }
 }
@@ -202,8 +206,12 @@ void playerTwo(){
   char hit1[10], hit2[10];
   while(1){
     fd2 = open(playerMove, O_RDONLY);
-    read(fd2, hit1, 10);
-    printf("Player One 1: %s\n", hit1);
+    while(1){
+      if(read(fd2, hit1, sizeof(hit1)) != NULL){
+          printf("Player One: %s\n", hit1);
+          break;
+      }
+    }
     //close(fd2);
 
     fd2 = open(playerMove, O_WRONLY);
