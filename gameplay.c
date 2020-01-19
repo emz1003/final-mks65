@@ -192,7 +192,7 @@ void playerOne(){
     fd = open(playerMove, O_RDONLY);
     read(fd, hit2, sizeof(hit2));
     printf("Player Two: %s\n", hit2);
-    close(fd);
+    //close(fd);
   }
 }
 void playerTwo(){
@@ -210,6 +210,6 @@ void playerTwo(){
     printf("Coordinate: ");
     fgets(hit2, sizeof(hit2), stdin);
     write(fd2, hit2, strlen(hit2 + 1));
-    close(fd2);
+    //close(fd2);
   }
 }
