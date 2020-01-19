@@ -174,6 +174,7 @@ void gamePlay(struct cell ownBoard[ROWS][COLS], struct cell mainBoard[ROWS][COLS
   printf("\n");
   //hitting and missing starts
   printf("Now, make your first move! Enter in a coordinate you want to hit in this format: A2\n");
+  printf("If you're player one, waiting for player two to start!\n");
 
 }
 
@@ -182,7 +183,7 @@ void playerOne(){
   char *playerMove = "pipes/pipe";
   mkfifo(playerMove, 0666);
   char hit1[10], hit2[10];
-  while(1){
+  while(isWin(playerOneBoard) && isWin(playerTwoBoard)){
     fd = open(playerMove, O_WRONLY);
     printf("Coordinate: ");
     fgets(hit1, 10, stdin);
@@ -199,13 +200,26 @@ void playerOne(){
     }
     close(fd);
   }
+  struct coordinate coor; //marks whether hit or miss on player one's board
+  coor.row = hit2[0] - 65;
+  coor.col = hit2[1] - 48;
+  int move = hitTarget(playerOneBoard, coor);
+  //now, mark on player two's main board whether he got a hit or miss
+  if(move == 1){ //MISS
+    playerTwoMain[coor.row][coor.col].symbol = MISS;
+    printBoard(playerTwoMain);
+  }
+  if(move == 2){ //HIT
+    playerTwoMain[coor.row][coor.col].symbol = HIT;
+    printBoard(playerTwoMain);
+  }
 }
 void playerTwo(){
   int fd2;
   char *playerMove = "pipes/pipe";
   mkfifo(playerMove, 0666);
   char hit1[10], hit2[10];
-  while(1){
+  while(isWin(playerOneBoard) && isWin(playerTwoBoard)){
     fd2 = open(playerMove, O_RDONLY);
     while(1){
       if(read(fd2, hit1, sizeof(hit1)) >0){
@@ -215,6 +229,19 @@ void playerTwo(){
       }
     }
     close(fd2);
+    struct coordinate coor; //marks whether hit or miss on player two's board
+    coor.row = hit1[0] - 65;
+    coor.col = hit1[1] - 48;
+    int move = hitTarget(playerTwoBoard, coor);
+    //now, mark on player one's main board whether he got a hit or miss
+    if(move == 1){ //MISS
+      playerOneMain[coor.row][coor.col].symbol = MISS;
+      printBoard(playerOneMain);
+    }
+    if(move == 2){ //HIT
+      playerOneMain[coor.row][coor.col].symbol = HIT;
+      printBoard(playerOneMain);
+    }
 
     fd2 = open(playerMove, O_WRONLY);
     printf("Coordinate: ");
