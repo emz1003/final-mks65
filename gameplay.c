@@ -1,7 +1,6 @@
 #include "final.h"
 
 char *playerMove = "/systems/final-mks65/pipes";
-mkfifo(playerMove, 666);
 void initializeBoard(struct cell gameBoard[ROWS][COLS]){
   for (int i = 0; i < ROWS; i++){
     for (int j = 0; j < COLS; j++) {
@@ -177,6 +176,7 @@ void gamePlay(){
 
 void playerOne(){
   int fd;
+  mkfifo(playerMove, 0666);
   char hit1[10], hit2[10];
   while(1){
     fd = open(playerMove, O_WRONLY);
@@ -193,6 +193,7 @@ void playerOne(){
 }
 void playerTwo(){
   int fd2;
+  mkfifo(playerMove, 666);
   char hit1[10], hit2[10];
   while(1){
     fd2 = open(playerMove, O_RDONLY);
