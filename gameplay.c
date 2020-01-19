@@ -12,13 +12,9 @@ void initializeBoard(struct cell gameBoard[ROWS][COLS]){
 
 //initialize the four boards of the game
 struct cell playerOneBoard[ROWS][COLS]; //playerOne's board
-initializeBoard(playerOneBoard);
 struct cell playerOneMain[ROWS][COLS]; //playerOne's main game board
-initializeBoard(playerOneMain);
 struct cell playerTwoBoard[ROWS][COLS]; //playerOne's main game board
-initializeBoard(playerTwoBoard);
 struct cell playerTwoMain[ROWS][COLS]; //playerOne's main game board
-initializeBoard(playerTwoMain);
 
 void printBoard(struct cell gameBoard[ROWS][COLS]){
   printf("  0 1 2 3 4 5 6 7 8 9\n");
@@ -138,6 +134,8 @@ int hitTarget(struct cell gameBoard[ROWS][COLS], struct coordinate position){
 }
 
 void gamePlay(struct cell ownBoard[ROWS][COLS], struct cell mainBoard[ROWS][COLS]){
+  initializeBoard(ownBoard);
+  initializeBoard(mainBoard);
   printBoard(ownBoard);
   printf("\n");
   printf("Now, place your ships! Enter in a coordinate pair of where you want your ship to start.\n");
