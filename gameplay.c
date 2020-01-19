@@ -199,7 +199,7 @@ void playerTwo(){
   while(1){
     fd2 = open(playerMove, O_RDONLY);
     read(fd2, hit1, 10);
-    printf("User 1: %s\n", hit1);
+    printf("Player One 1: %s\n", hit1);
     close(fd2);
 
     fd2 = open(playerMove, O_WRONLY);

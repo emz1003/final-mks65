@@ -42,6 +42,10 @@ Project: Create a simple program where users can log in to play and join battles
 1/14/20
 * Kaitlyn: Coded the isWin function to see when the game will end, looked at pipes to start coding that
 
+1/19/20
+* Kaitlyn: Was very very sad when I spent 2 hours trying to figure out how to deal with the branch that I created off of master- there were a few errors
+* Kaitlyn: Coded playerOne and playerTwo to try and get a pipe working: it didn't work after many many tries =(
+
 
 ### Features:
 
