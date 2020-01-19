@@ -194,7 +194,7 @@ void playerOne(){
 void playerTwo(){
   int fd2;
   char *playerMove = "/systems/final-mks65/pipes";
-  mkfifo(playerMove, 666);
+  mkfifo(playerMove, 0666);
   char hit1[10], hit2[10];
   while(1){
     fd2 = open(playerMove, O_RDONLY);
