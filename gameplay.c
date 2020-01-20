@@ -46,12 +46,12 @@ int putShip (struct cell gameBoard[ROWS][COLS], struct ship input, struct coordi
 
 int isCoorValid(struct cell gameBoard[ROWS][COLS], struct ship input, struct coordinate position, int direction){
   if(direction) {//Vertical
-    if((position.row + input.length-1) > 9) {//out of bounds
+    if((position.row + (input.length-1)) > 9) {//out of bounds
       return 0;
     }
   }
   else {
-    if((position.col + input.length-1) > 9) {//out of bounds
+    if((position.col + (input.length-1)) > 9) {//out of bounds
       return 0;
     }
   }
