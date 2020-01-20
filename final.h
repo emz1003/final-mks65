@@ -29,7 +29,7 @@
 #define BL 4 //battleship
 #define CR 3 //cruiser
 #define SL 3 //submarine
-#define DL 2 //destroyer
+#define DL 3 //destroyer
 
 //STRUCTS
 struct coordinate {
