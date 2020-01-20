@@ -85,9 +85,9 @@ void addShiptoBoard(struct cell gameBoard[ROWS][COLS], struct ship input, char s
     printf("Coordinate: ");
     char coor[10];
     char direc[10];
-    fgets(coor, sizeof coor, stdin);
+    fgets(coor, sizeof(coor), stdin);
     printf("Direction: ");
-    fgets(direc, sizeof direc, stdin);
+    fgets(direc, sizeof(direc), stdin);
     struct coordinate coor1;
     input.symbol = shipType;
     input.length = shipLength;
@@ -238,6 +238,7 @@ void playerTwo(){
     }
 
     fd2 = open(playerMove, O_WRONLY);
+    printf("Now, make a move! Enter in a coordinate you want to hit in this format: A2\n");
     printf("Coordinate: ");
     fgets(hit2, 10, stdin);
     write(fd2, hit2, strlen(hit2));
