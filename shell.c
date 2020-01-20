@@ -1,12 +1,12 @@
 #include "final.h"
 
 int is_logged_in = 0;
-char user[1024];
-char password[1024];
+char user[64];
+char password[64];
 
 int execute(char * line){
-    char usr[1024];
-    char pwd[1024];
+    char usr[64];
+    char pwd[64];
   if (!strcmp(line, "help")){ ///Instructions on commands available
       printf("To sign up, type 'sign up'\n");
       printf("To sign in, type 'sign in'\n");
@@ -20,9 +20,9 @@ int execute(char * line){
       printf("Please enter in a password: ");
       fgets(pwd, sizeof(pwd), stdin);
       if(signup(usr,pwd)) {
-          printf("Error: username taken. please try another.");
+          printf("Error: username taken. please try another.\n");
       } else {
-          printf("Please proceed to sign in.");
+          printf("Please proceed to sign in.\n");
       }
 
   } else if (!strcmp(line, "sign in")){
@@ -31,7 +31,7 @@ int execute(char * line){
       printf("Please enter in your password: ");
       fgets(pwd, sizeof(pwd), stdin);
       if (signin(usr, pwd)) {
-          printf("Error: cannot find user or password. Please retry.");
+          printf("Error: cannot find user or password. Please retry.\n");
       } else {
           is_logged_in = 1;
           strcpy(user, usr);
@@ -40,7 +40,7 @@ int execute(char * line){
       }
   } else if (!strcmp(line, "sign out")){
         if (signout(user)) {
-          printf("Error: cannot find user. Please retry.");
+          printf("Error: cannot find user. Please retry.\n");
         } else {
           is_logged_in = 0;
           user[0] = 0;

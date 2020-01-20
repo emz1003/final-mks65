@@ -2,13 +2,16 @@
 
 
 int create_db() {
+    // for(int i = 0; i < SHM_SIZE; i++) {
+    //     db = 0;
+    //     db++;
+    // }
     int semid;
     int shmid;
     semid = semget(SEMKEY, 1, IPC_CREAT | IPC_EXCL | 0644);
-    if (semid < 0)
+    if (errno)
     {
-        printf("error - cannot create semaphore: %s\n", strerror(errno));
-        return errno;
+        access_db();
     } else {
         union semun us;
         us.val = 1;
@@ -17,11 +20,6 @@ int create_db() {
     }
 
     shmid = shmget(SHMKEY, SHM_SIZE, IPC_CREAT | IPC_EXCL | 0644);
-    if (shmid < 0)
-    {
-        printf("error - cannot create shared memory: %s\n", strerror(errno));
-        return errno;
-    }
     printf("shared memory created\n");
 
     semid = semget(SEMKEY, 1, 0);
@@ -39,8 +37,18 @@ int create_db() {
     return 0;
 }
 
-int access_db() {
-    
+void access_db() {
+    int semid = semget(SEMKEY, 1, 0);
+    struct sembuf sb;
+    sb.sem_num = 0;
+    sb.sem_op = -1;
+    sb.sem_flg = SEM_UNDO;
+    semop(semid, &sb, 1);
+    int shmid = shmget(SHMKEY, SHM_SIZE, 0);
+    struct user_info *db = shmat(shmid, NULL, 0);
+    shmdt(db);
+    sb.sem_op = 1;
+    semop(semid, &sb, 1);
 }
 
 int signup(char * usr, char * pwd) {
@@ -52,20 +60,24 @@ int signup(char * usr, char * pwd) {
     semop(semid, &sb, 1);
     int shmid = shmget(SHMKEY, SHM_SIZE, 0);
     struct user_info *db = shmat(shmid, 0, 0);
+    struct user_info *copy = db;
 
-    while(db){
-        if(!strcmp(db->usr, usr)){
-            printf("user name taken\n");
+    printf("got here\n");
+    printf("%c\n", db->usr[0]);
+    printf("got here\n");
+    while(db->usr[0]){
+        if(db->usr[0] && !strcmp(db->usr, usr)){
+            printf("you already have an account! please sign in\n");
             return 1;
         }
         db++;
     }
-
-    db->usr = usr;
-    db->pwd = pwd;
+    printf("got here\n");
+    strcpy(db->usr, usr);
+    strcpy(db->pwd, pwd);
     db->is_active = 0;
 
-    shmdt(db);
+    shmdt(copy);
     sb.sem_op = 1;
     semop(semid, &sb, 1);
     return 0;
@@ -80,12 +92,13 @@ int signin(char * usr, char * pwd) {
     semop(semid, &sb, 1);
     int shmid = shmget(SHMKEY, SHM_SIZE, 0);
     struct user_info *db = shmat(shmid, 0, 0);
+    struct user_info *copy = db;
     int is_auth = 0;
 
-    while(db->usr) {
-        if(!strcmp(db->usr, usr)){
+    while(db->usr[0]) {
+        if(db->usr[0] && !strcmp(db->usr, usr)){
             if(!strcmp(db->pwd, pwd)) {
-                *db->is_active = 1;
+                db->is_active = 1;
                 is_auth = 1;
                 break;
             }
@@ -93,7 +106,7 @@ int signin(char * usr, char * pwd) {
         db++;
     }
 
-    shmdt(db);
+    shmdt(copy);
     sb.sem_op = 1;
     semop(semid, &sb, 1);
     if(is_auth)
@@ -110,16 +123,17 @@ int signout(char * usr) {
     semop(semid, &sb, 1);
     int shmid = shmget(SHMKEY, SHM_SIZE, 0);
     struct user_info * db = shmat(shmid, 0, 0);
+    struct user_info * copy = db;
 
-    while(db->usr) {
+    while(db->usr[0]) {
         if(!strcmp(db->usr, usr)){
-            *db->is_active = 0;
+            db->is_active = 0;
             break;
         }
         db++;
     }
 
-    shmdt(db);
+    shmdt(copy);
     sb.sem_op = 1;
     semop(semid, &sb, 1);
     return 0;
