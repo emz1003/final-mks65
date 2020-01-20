@@ -183,7 +183,7 @@ void playerOne(){
   char hit1[10], hit2[10];
   while(isWin(playerOneBoard)){
     fd = open(playerMove, O_WRONLY);
-    printf("Coordinate: ");
+    printf("Next Move Coordinate: ");
     fgets(hit1, 10, stdin);
     write(fd, hit1, strlen(hit1));
     close(fd);
@@ -204,12 +204,12 @@ void playerOne(){
   //now, mark on player two's main board whether he got a hit or miss
   if(move == 1){ //MISS
     playerTwoMain[coor.row][coor.col].symbol = MISS;
-    printBoard(playerTwoMain);
   }
   if(move == 2){ //HIT
     playerTwoMain[coor.row][coor.col].symbol = HIT;
-    printBoard(playerTwoMain);
   }
+  printf("Your Main Board:\n"); //show playerOne his own board
+  printBoard(playerOneMain);
 }
 }
 void playerTwo(){
@@ -235,16 +235,14 @@ void playerTwo(){
     //now, mark on player one's main board whether he got a hit or miss
     if(move == 1){ //MISS
       playerOneMain[coor.row][coor.col].symbol = MISS;
-      printBoard(playerOneMain);
     }
     if(move == 2){ //HIT
       playerOneMain[coor.row][coor.col].symbol = HIT;
-      printBoard(playerOneMain);
     }
-
+    printf("Your Main Board:\n");
+    printBoard(playerTwoMain);
     fd2 = open(playerMove, O_WRONLY);
-    printf("Now, make a move! Enter in a coordinate you want to hit in this format: A2\n");
-    printf("Coordinate: ");
+    printf("Next Move Coordinate: ");
     fgets(hit2, 10, stdin);
     write(fd2, hit2, strlen(hit2));
     close(fd2);
