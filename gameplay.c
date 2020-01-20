@@ -112,11 +112,13 @@ int hitTarget(struct cell gameBoard[ROWS][COLS], struct coordinate position){
     if(position.row >= 0 && position.row <= 9 && position.col >= 0 && position.col <= 9){ //checks to see if coordinate entered is within range
       if(gameBoard[position.row][position.col].symbol == WATER){
         gameBoard[position.row][position.col].symbol = MISS;
+        printf("Your Board:\n");
         printBoard(gameBoard);
         return 1; // MISS
       }
       else if(gameBoard[position.row][position.col].symbol == CARRIER || gameBoard[position.row][position.col].symbol == BATTLESHIP || gameBoard[position.row][position.col].symbol == CRUISER || gameBoard[position.row][position.col].symbol == SUBMARINE || gameBoard[position.row][position.col].symbol == DESTROYER){
         gameBoard[position.row][position.col].symbol = HIT;
+        printf("Your Board:\n");
         printBoard(gameBoard);
         return 2; //HIT
         break;
