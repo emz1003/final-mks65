@@ -47,26 +47,26 @@ int putShip (struct cell gameBoard[ROWS][COLS], struct ship input, struct coordi
 int isCoorValid(struct cell gameBoard[ROWS][COLS], struct ship input, struct coordinate position, int direction){
   if(direction) {//Vertical
     if((position.row + (input.length-1)) > 9) {//out of bounds
-      printf("hello"\n);
+      printf("hello\n");
       return 0;
     }
   }
   else {
     if((position.col + (input.length-1)) > 9) {//out of bounds
-      printf("bye"\n);
+      printf("bye\n");
       return 0;
     }
   }
   for (int i = 0; i < input.length; i++) {
     if (direction){ //Vertical
       if(gameBoard[position.row + i][position.col].symbol != WATER){
-        printf("yeet"\n);
+        printf("yeet\n");
         return 0; //intersects another ship, return 0
       }
     }
     else { //Horizontal
       if(gameBoard[position.row][position.col + i].symbol != WATER) {
-        printf("why"\n);
+        printf("why\n");
         return 0; //intersects another ship, return 0
       }
     }
