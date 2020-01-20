@@ -1,7 +1,7 @@
 #include "final.h"
 
 
-int create_db() {
+void create_db() {
     // for(int i = 0; i < SHM_SIZE; i++) {
     //     db = 0;
     //     db++;
@@ -12,6 +12,7 @@ int create_db() {
     if (errno)
     {
         access_db();
+        return;
     } else {
         union semun us;
         us.val = 1;
@@ -34,7 +35,6 @@ int create_db() {
     shmdt(db);
     sb.sem_op = 1;
     semop(semid, &sb, 1);
-    return 0;
 }
 
 void access_db() {
@@ -52,6 +52,7 @@ void access_db() {
 }
 
 int signup(char * usr, char * pwd) {
+    // printf("running signup!\n");
     int semid = semget(SEMKEY, 1, 0);
     struct sembuf sb;
     sb.sem_num = 0;
@@ -61,18 +62,15 @@ int signup(char * usr, char * pwd) {
     int shmid = shmget(SHMKEY, SHM_SIZE, 0);
     struct user_info *db = shmat(shmid, 0, 0);
     struct user_info *copy = db;
-
-    printf("got here\n");
-    printf("%c\n", db->usr[0]);
-    printf("got here\n");
     while(db->usr[0]){
         if(db->usr[0] && !strcmp(db->usr, usr)){
-            printf("you already have an account! please sign in\n");
+            shmdt(copy);
+            sb.sem_op = 1;
+            semop(semid, &sb, 1);
             return 1;
         }
         db++;
     }
-    printf("got here\n");
     strcpy(db->usr, usr);
     strcpy(db->pwd, pwd);
     db->is_active = 0;

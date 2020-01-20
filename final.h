@@ -75,7 +75,7 @@ void initializeBoard(struct cell gameBoard[ROWS][COLS]);
 void printBoard(struct cell gameBoard[ROWS][COLS]);
 int execute(char * line);
 void putShip (struct cell gameBoard[ROWS][COLS], struct ship input, struct coordinate position, char* direction);
-int create_db();
+void create_db();
 void access_db();
 int signup(char * usr, char *pwd);
 int signin(char * usr, char *pwd);
