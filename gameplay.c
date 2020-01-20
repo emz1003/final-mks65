@@ -233,7 +233,8 @@ void playerTwo(){
     coor.row = hit1[0] - 65;
     coor.col = hit1[1] - 48;
     int move = hitTarget(playerTwoBoard, coor);
-    printf("Move: %d\n", move);
+    printf("Row: %d\n", coor.row);
+    printf("Col: %d\n", coor.col);
     //now, mark on player one's main board whether he got a hit or miss
     if(move == 1){ //MISS
       playerOneMain[coor.row][coor.col].symbol = MISS;
