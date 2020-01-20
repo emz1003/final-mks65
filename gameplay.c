@@ -179,7 +179,7 @@ void playerOne(){
   char *playerMove = "pipes/pipe";
   mkfifo(playerMove, 0666);
   char hit1[10], hit2[10];
-  while(isWin(playerOneBoard) && isWin(playerTwoBoard)){
+  while(isWin(playerOneBoard)){
     fd = open(playerMove, O_WRONLY);
     printf("Coordinate: ");
     fgets(hit1, 10, stdin);
@@ -216,7 +216,7 @@ void playerTwo(){
   char *playerMove = "pipes/pipe";
   mkfifo(playerMove, 0666);
   char hit1[10], hit2[10];
-  while(isWin(playerOneBoard) && isWin(playerTwoBoard)){
+  while(isWin(playerTwoBoard)){
     fd2 = open(playerMove, O_RDONLY);
     while(1){
       if(read(fd2, hit1, sizeof(hit1)) >0){
