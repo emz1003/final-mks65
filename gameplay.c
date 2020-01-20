@@ -197,7 +197,6 @@ void playerOne(){
       }
     }
     close(fd);
-  }
   struct coordinate coor; //marks whether hit or miss on player one's board
   coor.row = hit2[0] - 65;
   coor.col = hit2[1] - 48;
@@ -211,6 +210,7 @@ void playerOne(){
     playerTwoMain[coor.row][coor.col].symbol = HIT;
     printBoard(playerTwoMain);
   }
+}
 }
 void playerTwo(){
   int fd2;
