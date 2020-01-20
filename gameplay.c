@@ -169,14 +169,12 @@ void gamePlay(struct cell ownBoard[ROWS][COLS], struct cell mainBoard[ROWS][COLS
   printBoard(ownBoard);
   printf("Main Game Board:\n");
   printBoard(mainBoard);
-  printf("\n");
-  //hitting and missing starts
-  printf("Now, make your first move! Enter in a coordinate you want to hit in this format: A2\n");
-  printf("If you're player one, waiting for player two to start!\n");
 
 }
 
 void playerOne(){
+  printf("Now, make your first move! Enter in a coordinate you want to hit in this format: A2\n");
+  printf("If you're player one, waiting for player two to start!\n");
   int fd;
   char *playerMove = "pipes/pipe";
   mkfifo(playerMove, 0666);
@@ -213,6 +211,7 @@ void playerOne(){
 }
 }
 void playerTwo(){
+  printf("Now, make your first move! Enter in a coordinate you want to hit in this format: A2\n");
   int fd2;
   char *playerMove = "pipes/pipe";
   mkfifo(playerMove, 0666);

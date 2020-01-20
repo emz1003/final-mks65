@@ -13,9 +13,13 @@ int execute(char * line){
       printf("Logged in!\n");
   } else if(!strcmp(line, "create game")){ //Create gameplay
     gamePlay(playerOneBoard, playerOneMain);
-    playerOne();
+    printf("Now, enter in 'start game 1' to start the game!\n");
   } else if(!strcmp(line, "join game")){
     gamePlay(playerTwoBoard, playerTwoMain);
+    printf("Now, enter in 'start game 2' to start the game!\n");
+  } else if(!strcmp(line, "start game 1")){
+    playerOne();
+  } else if(!strcmp(line, "start game 2")){
     playerTwo();
   } else if(!strcmp(line, "exit")){
       return 1; //exits the entire program
