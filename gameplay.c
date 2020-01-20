@@ -114,17 +114,20 @@ int hitTarget(struct cell gameBoard[ROWS][COLS], struct coordinate position){
         gameBoard[position.row][position.col].symbol = MISS;
         printf("Your Board:\n");
         printBoard(gameBoard);
+        printf("MISS\n")
         return 1; // MISS
+        break;
       }
       else if(gameBoard[position.row][position.col].symbol == CARRIER || gameBoard[position.row][position.col].symbol == BATTLESHIP || gameBoard[position.row][position.col].symbol == CRUISER || gameBoard[position.row][position.col].symbol == SUBMARINE || gameBoard[position.row][position.col].symbol == DESTROYER){
         gameBoard[position.row][position.col].symbol = HIT;
         printf("Your Board:\n");
         printBoard(gameBoard);
+        printf("HIT\n");
         return 2; //HIT
         break;
       }
       else if(gameBoard[position.row][position.col].symbol == HIT || gameBoard[position.row][position.col].symbol == MISS){
-        printf("This Coordinate Was Already Targeted! Try Again.\n");
+        printf("This Coordinate Was Already Targeted!\n");
       }
     }
     else { //if coordinate not valid, ask for another one
@@ -176,7 +179,7 @@ void gamePlay(struct cell ownBoard[ROWS][COLS], struct cell mainBoard[ROWS][COLS
 
 void playerOne(){
   printf("Now, make your first move! Enter in a coordinate you want to hit in this format: A2\n");
-  printf("If you're player one, waiting for player two to start!\n");
+  printf("Only make a move when the screen shows 'Next Move Coordinate:'\n");
   int fd;
   char *playerMove = "pipes/pipe";
   mkfifo(playerMove, 0666);
@@ -214,6 +217,7 @@ void playerOne(){
 }
 void playerTwo(){
   printf("Now, make your first move! Enter in a coordinate you want to hit in this format: A2\n");
+  printf("Only make a move when the screen shows 'Next Move Coordinate:'\n");
   int fd2;
   char *playerMove = "pipes/pipe";
   mkfifo(playerMove, 0666);
