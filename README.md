@@ -20,6 +20,7 @@ Note: Players may find it effective to minimize their terminal session or hide i
 ### Features:
 - A database made of shared memory and facilitated by semaphores that allows for the storage of all user information, up to 32 users
 - Pipes that facilitate the interaction between two users during gameplay
+- Allocating memory for program functionality
 
 ### Attempted: Nothing that we have not accomplished yet.
 
