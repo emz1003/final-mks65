@@ -46,7 +46,7 @@ Project: Create a simple program where users can log in to play and join battles
 * Kaitlyn: Was very very sad when I spent 2 hours trying to figure out how to deal with the branch that I created off of master- there were a few errors
 * Kaitlyn: Coded playerOne and playerTwo to try and get a pipe working: it didn't work after many many tries =(
 * Kaitlyn: After lots of hard work, pipes are implemented! Starting to implement the gameplay on both ends
-
+* Kaitlyn: After lots of debugging, I implemented the gameplay with the pipes! Still some things that aren't working though
 
 ### Features:
 
