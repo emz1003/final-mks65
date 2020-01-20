@@ -124,6 +124,7 @@ int hitTarget(struct cell gameBoard[ROWS][COLS], struct coordinate position){
       }
       else if(gameBoard[position.row][position.col].symbol == HIT || gameBoard[position.row][position.col].symbol == MISS){
         printf("This Coordinate Was Already Targeted!\n");
+        break;
       }
     }
     else { //if coordinate not valid, ask for another one
@@ -232,6 +233,7 @@ void playerTwo(){
     coor.row = hit1[0] - 65;
     coor.col = hit1[1] - 48;
     int move = hitTarget(playerTwoBoard, coor);
+    printf("Move: %d\n", move);
     //now, mark on player one's main board whether he got a hit or miss
     if(move == 1){ //MISS
       playerOneMain[coor.row][coor.col].symbol = MISS;
