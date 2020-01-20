@@ -114,7 +114,7 @@ int hitTarget(struct cell gameBoard[ROWS][COLS], struct coordinate position){
         gameBoard[position.row][position.col].symbol = MISS;
         printf("Your Board:\n");
         printBoard(gameBoard);
-        printf("MISS\n")
+        printf("MISS\n");
         return 1; // MISS
         break;
       }
