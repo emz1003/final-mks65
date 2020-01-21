@@ -131,6 +131,7 @@ int hitTarget(struct cell gameBoard[ROWS][COLS], struct coordinate position){
       printf("Coordinate Not Valid! Try Again.\n");
     }
   }
+  return 0;
 }
 
 void gamePlay(struct cell ownBoard[ROWS][COLS], struct cell mainBoard[ROWS][COLS]){

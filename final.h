@@ -9,7 +9,17 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <pwd.h>
+#include <sys/ipc.h>
+#include <sys/sem.h>
+#include <sys/shm.h>
 
+// union semun {
+//     int val;               /* Value for SETVAL */
+//     struct semid_ds *buf;  /* Buffer for IPC_STAT, IPC_SET */
+//     unsigned short *array; /* Array for GETALL, SETALL */
+//     struct seminfo *__buf; /* Buffer for IPC_INFO
+//                               (Linux-specific) */
+// };
 //CONSTANTS
 #define ROWS 10
 #define COLS 10
@@ -23,6 +33,9 @@
 #define CRUISER 'r'
 #define SUBMARINE 's'
 #define DESTROYER 'd'
+#define SEMKEY 84771
+#define SHMKEY 84775
+#define SHM_SIZE 2048 // stores 32 users
 
 //length of ships
 #define CL 5 //carrier
@@ -35,6 +48,12 @@
 struct coordinate {
   int row;
   int col;
+};
+
+struct user_info {
+  char usr[32];
+  char pwd[32];
+  int is_active;
 };
 
 struct cell {
@@ -66,3 +85,9 @@ int isWin (struct cell gameBoard[ROWS][COLS]);
 int hitTarget(struct cell gameBoard[ROWS][COLS], struct coordinate position);
 void playerOne();
 void playerTwo();
+void create_db();
+void access_db();
+int signup(char * usr, char *pwd);
+int signin(char * usr, char *pwd);
+int signout(char * usr);
+

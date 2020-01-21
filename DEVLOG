@@ -1,0 +1,55 @@
+emilyZ -- 2020-01-02 15:17
+Add initial file structure and file details, including main function and makefile.
+
+kaitlynL -- 2020-01-02
+Coded the beginning of the user interface (shell.c)
+
+kaitlynL -- 2020-01-05
+Made changes to the interface and editted the makefile to make it include shell.c
+Created the file gameplay.c, added it to the makefile
+Coded the functions initializeBoard (initializes a gameBoard) and printBoard (prints the board out), kept on editting until both functions worked
+
+kaitlynL -- 2020-01-07
+Coded the function putShip (places a ship down on to the board)
+
+kaitlynL -- 2020-01-08
+Coded the function gamePlay (contains the entire game play), debugged the function but the ships wouldn't be oriented in the right direction
+
+kaitlynL -- 2020-01-09
+Worked for a long time to figure out the coordinate system of the board and place the ships down accordingly.
+putShip finally worked correctly
+
+kaitlynL -- 2020-01-10
+Created the function addShiptoBoard to make putting the ships on the board more modular
+Somehow the coordinates were still messed up, I finally fixed everything
+
+kaitlynL -- 2020-01-11
+To make sure that the coordinates the user inputs to place the ships are valid, I created the function isCoorValid. Tested it with the rest of the functions in gameplay.c and it works!
+Created the main gameBoard, formatted the game to print both your board and the main board together. But for some reason, the main board isn't setting up right...
+
+kaitlynL -- 2020-01-12
+Main board is created correctly
+Coded the function hitTarget, which makes a target either a hit or a miss
+Also made hitTarget check if the coordinate entered was valid
+Tested everything, but it doesn't work. Must work on it tomorrow.
+
+emilyZ -- 2020-01-13 23:41
+Add to gitignore and initial create db function in interface file.
+
+kaitlynL -- 2020-01-13
+After lots of debugging, the hitTarget works! Works great with the mainboard. Next steps: look at pipes for a two player game!
+
+kaitlynL -- 2020-01-14
+Coded the isWin function to see when the game will end, looked at pipes to start coding that
+
+emilyZ -- 2020-01-19 23:43
+finish all interface functions
+
+kaitlynL -- 2020-01-19
+Was very very sad when I spent 2 hours trying to figure out how to deal with the branch that I created off of master- there were a few errors
+Coded playerOne and playerTwo to try and get a pipe working: it didn't work after many many tries =(
+After lots of hard work, pipes are implemented! Starting to implement the gameplay on both ends
+After lots of debugging, I implemented the gameplay with the pipes! Still some things that aren't working though
+
+emilyZ -- 2020-01-20 18:15
+update README, PROPOSAL, and reformat DEVLOG.
