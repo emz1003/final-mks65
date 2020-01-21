@@ -229,7 +229,6 @@ void playerOne(){
     }
     close(fd3);
     //update playerOne's main board
-    printf("Check: %s\n", check);
     if(check[2] == '1'){ //if miss
       int row = check[0] - 65;
       int col = check[1] - 48;
@@ -290,7 +289,6 @@ void playerTwo(){
     }
     close(fd4);
     //update playerTwo's main board
-    printf("Check: %s\n", check);
     if(check[2] == '1'){ //if miss
       int row = check[0] - 65;
       int col = check[1] - 48;
@@ -306,11 +304,9 @@ void playerTwo(){
     fd4 = open(playerCheck, O_WRONLY);
     if(move == 1){
       strcat(hit1, "1"); //MISS
-      printf("Hit1: %s\n", hit1);
     }
     if(move == 2){
       strcat(hit1, "2"); //HIT
-      printf("Hit1: %s\n", hit1);
     }
     write(fd4, hit1, strlen(hit1));
     close(fd4);
