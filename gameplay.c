@@ -201,16 +201,31 @@ void playerOne(){
   coor.row = hit2[0] - 65;
   coor.col = hit2[1] - 48;
   int move = hitTarget(playerOneBoard, coor);
+
   //now, mark on player two's main board whether he got a hit or miss
-  if(move == 1){ //MISS
-    playerTwoMain[coor.row][coor.col].symbol = MISS;
+  fd = open(playerMove, O_WRONLY);
+  if(move == 1){
+    strcat(hit2, "1"); //MISS
   }
-  if(move == 2){ //HIT
-    playerTwoMain[coor.row][coor.col].symbol = HIT;
+  if(move == 2){
+    strcat(hit2, "2"); //HIT
   }
+  write(fd, hit2, strlen(hit2));
+  close(fd);
+
+  //now, read whether the previous move ended up being a hit or miss to playerTwo's main board
+  fd = open(playerMove, O_RDONLY);
+  while(1){
+    if(read(fd, hit2, sizeof(hit2)) >0 ){
+        *strchr(hit2, '\n') = '\0';
+        break;
+    }
+  }
+  close(fd);
   printf("Your Main Board:\n"); //show playerOne his own board
   printBoard(playerOneMain);
 }
+  printf("Player Two Won!\n");
 }
 void playerTwo(){
   printf("Now, make your first move! Enter in a coordinate you want to hit in this format: A2\n");
@@ -233,12 +248,26 @@ void playerTwo(){
     coor.col = hit1[1] - 48;
     int move = hitTarget(playerTwoBoard, coor);
     //now, mark on player one's main board whether he got a hit or miss
-    if(move == 1){ //MISS
-      playerOneMain[coor.row][coor.col].symbol = MISS;
+    fd2 = open(playerMove, O_WRONLY);
+    if(move == 1){
+      strcat(hit1, "1"); //MISS
     }
-    if(move == 2){ //HIT
-      playerOneMain[coor.row][coor.col].symbol = HIT;
+    if(move == 2){
+      strcat(hit1, "2"); //HIT
     }
+    write(fd2, hit1, strlen(hit1));
+    close(fd2);
+
+    //now, read whether the previous move ended up being a hit or miss to playerTwo's main board
+    fd2 = open(playerMove, O_RDONLY);
+    while(1){
+      if(read(fd2, hit1, sizeof(hit1)) >0){
+          *strchr(hit1, '\n') = '\0';
+          break;
+      }
+    }
+    close(fd2);
+
     printf("Your Main Board:\n");
     printBoard(playerTwoMain);
     fd2 = open(playerMove, O_WRONLY);
@@ -247,4 +276,5 @@ void playerTwo(){
     write(fd2, hit2, strlen(hit2));
     close(fd2);
   }
+  printf("Player One Won!\n");
 }
