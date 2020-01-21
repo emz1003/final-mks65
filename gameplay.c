@@ -290,12 +290,12 @@ void playerTwo(){
     }
     close(fd4);
     //update playerTwo's main board
-    if(hit1[2] == '1')){ //if miss
+    if(hit1[2] == '1'){ //if miss
       int row = hit1[0] - 65;
       int col = hit1[1] - 48;
       playerTwoMain[row][col].symbol = MISS;
     }
-    else if(hit1[2] == '2')){ //if hit
+    else if(hit1[2] == '2'){ //if hit
       int row = hit1[0] - 65;
       int col = hit1[1] - 48;
       playerTwoMain[row][col].symbol = HIT;
