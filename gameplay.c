@@ -205,7 +205,8 @@ void playerOne(){
   int fd3;
   char *playerCheck = "pipes/pipe1"; //open another pipe to deal with the second communication
   mkfifo(playerCheck, 0666);
-  //now, mark on player two's main board whether he got a hit or miss
+
+  //now, tell player two's main board whether he got a hit or miss
   fd3 = open(playerCheck, O_WRONLY);
   if(move == 1){
     strcat(hit2, "1"); //MISS
@@ -269,18 +270,8 @@ void playerTwo(){
     int fd4;
     char *playerCheck = "pipes/pipe1"; //open another pipe to deal with the second communication
     mkfifo(playerCheck, 0666);
-    //now, mark on player two's main board whether he got a hit or miss
-    fd4 = open(playerCheck, O_WRONLY);
-    if(move == 1){
-      strcat(hit1, "1"); //MISS
-    }
-    if(move == 2){
-      strcat(hit1, "2"); //HIT
-    }
-    write(fd4, hit1, strlen(hit1));
-    close(fd4);
 
-    //now, read whether the previous move ended up being a hit or miss to playerOne's main board
+    //now, read whether the previous move ended up being a hit or miss to playerTwo's main board
     fd4 = open(playerCheck, O_RDONLY);
     while(1){
       if(read(fd4, hit1, sizeof(hit1)) >0 ){
@@ -300,6 +291,17 @@ void playerTwo(){
       int col = hit1[1] - 48;
       playerTwoMain[row][col].symbol = HIT;
     }
+
+    //now, mark on player one's main board whether he got a hit or miss
+    fd4 = open(playerCheck, O_WRONLY);
+    if(move == 1){
+      strcat(hit1, "1"); //MISS
+    }
+    if(move == 2){
+      strcat(hit1, "2"); //HIT
+    }
+    write(fd4, hit1, strlen(hit1));
+    close(fd4);
 
     printf("Your Main Board:\n");
     printBoard(playerTwoMain);
