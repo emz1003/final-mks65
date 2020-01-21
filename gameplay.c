@@ -221,10 +221,9 @@ void playerOne(){
     char check[10];
     while(1){
       if(read(fd3, check, sizeof(check)) >0 ){
-        if(strchr(hit1, '\n')){
-           *strchr(check, '\n')  = '\0';
+        if(strchr(check, '\n')){
+          *strchr(check, '\n')  = '\0';
         }
-        break;
       }
     }
     close(fd);
@@ -261,9 +260,7 @@ void playerTwo(){
     fd2 = open(playerMove, O_RDONLY);
     while(1){
       if(read(fd2, hit1, sizeof(hit1)) >0){
-          if(strchr(hit1, '\n')){
-             *strchr(check, '\n')  = '\0';
-          }
+          *strchr(hit1, '\n') = '\0';
           break;
       }
     }
@@ -284,8 +281,9 @@ void playerTwo(){
     char check[10];
     while(1){
       if(read(fd4, check, sizeof(check)) >0 ){
-          *strchr(check, '\n') = '\0';
-          break;
+        if(strchr(check, '\n')){
+          *strchr(check, '\n')  = '\0';
+        }
       }
     }
     close(fd4);
