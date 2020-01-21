@@ -245,6 +245,7 @@ void playerOne(){
   if(isWin(playerTwoBoard) || isWin(playerOneBoard)){
       printf("Player Two Won!\n");
       break;
+    }
 }
 }
 
