@@ -23,7 +23,7 @@ Note: Players may find it effective to minimize their terminal session or hide i
 - Allocating memory for program functionality
 - A functioning battleship game that runs in the terminal
 
-### Attempted: Nothing that we have not accomplished yet.
+### Attempted:
 - Couldn't get both terminals to exit when one player wins, only one terminal exits correctly
 ### Bugs:
 - At times, a coordinate that is valid may be marked invalid, not sure why
