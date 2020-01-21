@@ -209,11 +209,9 @@ void playerOne(){
     fd3 = open(playerCheck, O_WRONLY);
     if(move == 1){
       strcat(hit2, "1"); //MISS
-      printf("Hit2: %s\n", hit2);
     }
     if(move == 2){
       strcat(hit2, "2"); //HIT
-      printf("Hit2: %s\n", hit2);
     }
     write(fd3, hit2, strlen(hit2));
     close(fd3);
@@ -223,8 +221,10 @@ void playerOne(){
     char check[10];
     while(1){
       if(read(fd3, check, sizeof(check)) >0 ){
-          *strchr(check, '\n') = '\0';
-          break;
+        if(strchr(hit1, '\n')){
+           *strchr(check, '\n')  = '\0';
+        }
+        break;
       }
     }
     close(fd);
@@ -261,7 +261,9 @@ void playerTwo(){
     fd2 = open(playerMove, O_RDONLY);
     while(1){
       if(read(fd2, hit1, sizeof(hit1)) >0){
-          *strchr(hit1, '\n') = '\0';
+          if(strchr(hit1, '\n')){
+             *strchr(check, '\n')  = '\0';
+          }
           break;
       }
     }
