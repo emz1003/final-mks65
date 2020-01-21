@@ -192,7 +192,6 @@ void playerOne(){
     while(1){
       if(read(fd, hit2, sizeof(hit2)) >0 ){
           *strchr(hit2, '\n') = '\0';
-          printf("Player Two: %s\n", hit2);
           break;
       }
     }
@@ -204,11 +203,9 @@ void playerOne(){
   //now, mark on player two's main board whether he got a hit or miss
   if(move == 1){ //MISS
     playerTwoMain[coor.row][coor.col].symbol = MISS;
-    printBoard(playerTwoMain);
   }
   if(move == 2){ //HIT
     playerTwoMain[coor.row][coor.col].symbol = HIT;
-    printBoard(playerTwoMain);
   }
   printf("Your Main Board:\n"); //show playerOne his own board
   printBoard(playerOneMain);
@@ -226,7 +223,6 @@ void playerTwo(){
     while(1){
       if(read(fd2, hit1, sizeof(hit1)) >0){
           *strchr(hit1, '\n') = '\0';
-          printf("Player One: %s\n", hit1);
           break;
       }
     }
@@ -235,8 +231,6 @@ void playerTwo(){
     coor.row = hit1[0] - 65;
     coor.col = hit1[1] - 48;
     int move = hitTarget(playerTwoBoard, coor);
-    printf("Row: %d\n", coor.row);
-    printf("Col: %d\n", coor.col);
     //now, mark on player one's main board whether he got a hit or miss
     if(move == 1){ //MISS
       playerOneMain[coor.row][coor.col].symbol = MISS;
