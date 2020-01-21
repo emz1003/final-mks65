@@ -202,42 +202,42 @@ void playerOne(){
     coor.col = hit2[1] - 48;
     int move = hitTarget(playerOneBoard, coor);
 
-  int fd3;
-  char *playerCheck = "pipes/pipe1"; //open another pipe to deal with the second communication
-  mkfifo(playerCheck, 0666);
+    int fd3;
+    char *playerCheck = "pipes/pipe1"; //open another pipe to deal with the second communication
+    mkfifo(playerCheck, 0666);
 
-  //now, tell player two's main board whether he got a hit or miss
-  fd3 = open(playerCheck, O_WRONLY);
-  if(move == 1){
-    strcat(hit2, "1"); //MISS
-  }
-  if(move == 2){
-    strcat(hit2, "2"); //HIT
-  }
-  write(fd3, hit2, strlen(hit2));
-  close(fd3);
-
-  //now, read whether the previous move ended up being a hit or miss to playerOne's main board
-  fd3 = open(playerCheck, O_RDONLY);
-  char check[10];
-  while(1){
-    if(read(fd3, check, sizeof(check)) >0 ){
-        *strchr(check, '\n') = '\0';
-        break;
+    //now, tell player two's main board whether he got a hit or miss
+    fd3 = open(playerCheck, O_WRONLY);
+    if(move == 1){
+      strcat(hit2, "1"); //MISS
     }
-  }
-  close(fd);
-  //update playerOne's main board
-  if(check[2] == '1'){ //if miss
-    int row = check[0] - 65;
-    int col = check[1] - 48;
-    playerOneMain[row][col].symbol = MISS;
-  }
-  else if(check[2] == '2'){ //if hit
-    int row = check[0] - 65;
-    int col = check[1] - 48;
-    playerOneMain[row][col].symbol = HIT;
-  }
+    if(move == 2){
+      strcat(hit2, "2"); //HIT
+    }
+    write(fd3, hit2, strlen(hit2));
+    close(fd3);
+
+    //now, read whether the previous move ended up being a hit or miss to playerOne's main board
+    fd3 = open(playerCheck, O_RDONLY);
+    char check[10];
+    while(1){
+      if(read(fd3, check, sizeof(check)) >0 ){
+          *strchr(check, '\n') = '\0';
+          break;
+      }
+    }
+    close(fd);
+    //update playerOne's main board
+    if(check[2] == '1'){ //if miss
+      int row = check[0] - 65;
+      int col = check[1] - 48;
+      playerOneMain[row][col].symbol = MISS;
+    }
+    else if(check[2] == '2'){ //if hit
+      int row = check[0] - 65;
+      int col = check[1] - 48;
+      playerOneMain[row][col].symbol = HIT;
+    }
 
   printf("Your Main Board:\n"); //show playerOne his own board
   printBoard(playerOneMain);
@@ -266,11 +266,12 @@ void playerTwo(){
     coor.col = hit1[1] - 48;
     int move = hitTarget(playerTwoBoard, coor);
 
+    fd2 = open(playerMove, O_WRONLY);
     printf("Next Move Coordinate: ");
     fgets(hit2, 10, stdin);
     write(fd2, hit2, strlen(hit2));
     close(fd2);
-    //now, mark on player one's main board whether he got a hit or miss
+    now, mark on player one's main board whether he got a hit or miss
     int fd4;
     char *playerCheck = "pipes/pipe1"; //open another pipe to deal with the second communication
     mkfifo(playerCheck, 0666);
@@ -310,7 +311,6 @@ void playerTwo(){
 
     printf("Your Main Board:\n");
     printBoard(playerTwoMain);
-    fd2 = open(playerMove, O_WRONLY);
 
   }
   printf("Player One Won!\n");
