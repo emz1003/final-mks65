@@ -182,6 +182,9 @@ void playerOne(){
   char *playerMove = "pipes/pipe";
   mkfifo(playerMove, 0666);
   char hit1[10], hit2[10];
+  int fd3;
+  char *playerCheck = "pipes/pipe1";
+  mkfifo(playerCheck, 0666);
   while(isWin(playerOneBoard)){
     fd = open(playerMove, O_WRONLY);
     printf("Next Move Coordinate: ");
@@ -202,11 +205,6 @@ void playerOne(){
     coor.col = hit2[1] - 48;
     int move = hitTarget(playerOneBoard, coor);
 
-    //open another pipe to deal with the second communication
-    int fd3;
-    char *playerCheck = "pipes/pipe1";
-    mkfifo(playerCheck, 0666);
-
     //now, tell player two's main board whether he got a hit or miss
     fd3 = open(playerCheck, O_WRONLY);
     if(move == 1){
@@ -223,7 +221,6 @@ void playerOne(){
     //now, read whether the previous move ended up being a hit or miss to playerOne's main board
     fd3 = open(playerCheck, O_RDONLY);
     char check[10];
-    printf("Check: %s\n", check);
     while(1){
       if(read(fd3, check, sizeof(check)) >0 ){
           *strchr(check, '\n') = '\0';
@@ -232,6 +229,7 @@ void playerOne(){
     }
     close(fd);
     //update playerOne's main board
+    printf("Check: %s\n", check);
     if(check[2] == '1'){ //if miss
       int row = check[0] - 65;
       int col = check[1] - 48;
@@ -255,6 +253,9 @@ void playerTwo(){
   int fd2;
   char *playerMove = "pipes/pipe";
   mkfifo(playerMove, 0666);
+  int fd4;
+  char *playerCheck = "pipes/pipe1";
+  mkfifo(playerCheck, 0666);
   char hit1[10], hit2[10];
   while(isWin(playerTwoBoard)){
     fd2 = open(playerMove, O_RDONLY);
@@ -275,11 +276,6 @@ void playerTwo(){
     fgets(hit2, 10, stdin);
     write(fd2, hit2, strlen(hit2));
     close(fd2);
-
-    //now, mark on player one's main board whether he got a hit or miss
-    int fd4;
-    char *playerCheck = "pipes/pipe1"; //open another pipe to deal with the second communication
-    mkfifo(playerCheck, 0666);
 
     //now, read whether the previous move ended up being a hit or miss to playerTwo's main board
     fd4 = open(playerCheck, O_RDONLY);
