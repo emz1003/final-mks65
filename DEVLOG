@@ -58,3 +58,4 @@ kaitlynL -- 2020-01-20
 Spent plenty of time trying to get the mainBoards to communicate effectively
 Finally got it, had to create an entire new pipe for new information
 After lots of debugging, the game is finally functional! However, when someone wins, the program doesn't effectively exit
+Ok, I got one of the players to exit when the game ends, I think that's good enough

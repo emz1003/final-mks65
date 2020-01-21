@@ -38,10 +38,10 @@ union semun {
 #define SHM_SIZE 2048 // stores 32 users
 
 //length of ships
-#define CL 2 //carrier
-#define BL 2 //battleship
-#define CR 2 //cruiser
-#define SL 2 //submarine
+#define CL 5 //carrier
+#define BL 4 //battleship
+#define CR 3 //cruiser
+#define SL 3 //submarine
 #define DL 2 //destroyer
 
 //STRUCTS

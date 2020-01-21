@@ -127,7 +127,7 @@ int hitTarget(struct cell gameBoard[ROWS][COLS], struct coordinate position){
         break;
       }
     }
-    else { //if coordinate not valid, ask for another one
+    else {
       printf("Coordinate Not Valid! Try Again.\n");
       break;
     }
