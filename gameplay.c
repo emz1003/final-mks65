@@ -226,12 +226,12 @@ void playerOne(){
   }
   close(fd);
   //update playerOne's main board
-  if(!strcmp(hit2[2], "1")){ //if miss
+  if(hit2[2] == '1'){ //if miss
     int row = hit2[0] - 65;
     int col = hit2[1] - 48;
     playerOneMain[row][col].symbol = MISS;
   }
-  else if(!strcmp(hit2[2], "2")){ //if hit
+  else if(hit2[2] == '2'){ //if hit
     int row = hit2[0] - 65;
     int col = hit2[1] - 48;
     playerOneMain[row][col].symbol = HIT;
@@ -242,6 +242,7 @@ void playerOne(){
 }
   printf("Player Two Won!\n");
 }
+
 void playerTwo(){
   printf("Now, make your first move! Enter in a coordinate you want to hit in this format: A2\n");
   printf("Only make a move when the screen shows 'Next Move Coordinate:'\n");
@@ -280,21 +281,21 @@ void playerTwo(){
     close(fd4);
 
     //now, read whether the previous move ended up being a hit or miss to playerOne's main board
-    fd3 = open(playerCheck, O_RDONLY);
+    fd4 = open(playerCheck, O_RDONLY);
     while(1){
-      if(read(fd3, hit1, sizeof(hit1)) >0 ){
+      if(read(fd4, hit1, sizeof(hit1)) >0 ){
           *strchr(hit1, '\n') = '\0';
           break;
       }
     }
-    close(fd);
+    close(fd4);
     //update playerTwo's main board
-    if(!strcmp(hit1[2], "1")){ //if miss
+    if(hit1[2] == '1')){ //if miss
       int row = hit1[0] - 65;
       int col = hit1[1] - 48;
       playerTwoMain[row][col].symbol = MISS;
     }
-    else if(!strcmp(hit1[2], "2")){ //if hit
+    else if(hit1[2] == '2')){ //if hit
       int row = hit1[0] - 65;
       int col = hit1[1] - 48;
       playerTwoMain[row][col].symbol = HIT;
