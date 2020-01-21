@@ -243,6 +243,13 @@ void playerTwo(){
       }
     }
     close(fd2);
+
+    fd2 = open(playerMove, O_WRONLY);
+    printf("Next Move Coordinate: ");
+    fgets(hit2, 10, stdin);
+    write(fd2, hit2, strlen(hit2));
+    close(fd2);
+
     struct coordinate coor; //marks whether hit or miss on player two's board
     coor.row = hit1[0] - 65;
     coor.col = hit1[1] - 48;
@@ -270,11 +277,6 @@ void playerTwo(){
 
     printf("Your Main Board:\n");
     printBoard(playerTwoMain);
-    fd2 = open(playerMove, O_WRONLY);
-    printf("Next Move Coordinate: ");
-    fgets(hit2, 10, stdin);
-    write(fd2, hit2, strlen(hit2));
-    close(fd2);
   }
   printf("Player One Won!\n");
 }
