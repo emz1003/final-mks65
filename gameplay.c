@@ -271,7 +271,7 @@ void playerTwo(){
     fgets(hit2, 10, stdin);
     write(fd2, hit2, strlen(hit2));
     close(fd2);
-    now, mark on player one's main board whether he got a hit or miss
+    //now, mark on player one's main board whether he got a hit or miss
     int fd4;
     char *playerCheck = "pipes/pipe1"; //open another pipe to deal with the second communication
     mkfifo(playerCheck, 0666);
