@@ -226,7 +226,7 @@ void playerOne(){
         }
       }
     }
-    close(fd);
+    close(fd3);
     //update playerOne's main board
     printf("Check: %s\n", check);
     if(check[2] == '1'){ //if miss
