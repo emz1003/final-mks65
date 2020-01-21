@@ -2,10 +2,6 @@
 
 
 void create_db() {
-    // for(int i = 0; i < SHM_SIZE; i++) {
-    //     db = 0;
-    //     db++;
-    // }
     int semid;
     int shmid;
     semid = semget(SEMKEY, 1, IPC_CREAT | IPC_EXCL | 0644);
