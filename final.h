@@ -25,11 +25,11 @@
 #define DESTROYER 'd'
 
 //length of ships
-#define CL 1 //carrier
-#define BL 1 //battleship
-#define CR 1 //cruiser
-#define SL 1 //submarine
-#define DL 1 //destroyer
+#define CL 5 //carrier
+#define BL 4 //battleship
+#define CR 3 //cruiser
+#define SL 3 //submarine
+#define DL 2 //destroyer
 
 //STRUCTS
 struct coordinate {

@@ -204,9 +204,11 @@ void playerOne(){
   //now, mark on player two's main board whether he got a hit or miss
   if(move == 1){ //MISS
     playerTwoMain[coor.row][coor.col].symbol = MISS;
+    printBoard(playerTwoMain);
   }
   if(move == 2){ //HIT
     playerTwoMain[coor.row][coor.col].symbol = HIT;
+    printBoard(playerTwoMain);
   }
   printf("Your Main Board:\n"); //show playerOne his own board
   printBoard(playerOneMain);
