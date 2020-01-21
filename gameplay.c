@@ -189,6 +189,19 @@ void playerOne(){
     write(fd, hit1, strlen(hit1));
     close(fd);
 
+    fd = open(playerMove, O_RDONLY);
+    while(1){
+      if(read(fd, hit2, sizeof(hit2)) >0 ){
+          *strchr(hit2, '\n') = '\0';
+          break;
+      }
+    }
+    close(fd);
+    struct coordinate coor; //marks whether hit or miss on player one's board
+    coor.row = hit2[0] - 65;
+    coor.col = hit2[1] - 48;
+    int move = hitTarget(playerOneBoard, coor);
+
   int fd3;
   char *playerCheck = "pipes/pipe1"; //open another pipe to deal with the second communication
   mkfifo(playerCheck, 0666);
@@ -225,19 +238,6 @@ void playerOne(){
     int col = check[1] - 48;
     playerOneMain[row][col].symbol = HIT;
   }
-  //now, wait for the returning coordinate of playerTwo
-  fd = open(playerMove, O_RDONLY);
-  while(1){
-    if(read(fd, hit2, sizeof(hit2)) >0 ){
-        *strchr(hit2, '\n') = '\0';
-        break;
-    }
-  }
-  close(fd);
-  struct coordinate coor; //marks whether hit or miss on player one's board
-  coor.row = hit2[0] - 65;
-  coor.col = hit2[1] - 48;
-  int move = hitTarget(playerOneBoard, coor);
 
   printf("Your Main Board:\n"); //show playerOne his own board
   printBoard(playerOneMain);
@@ -261,12 +261,15 @@ void playerTwo(){
       }
     }
     close(fd2);
-
     struct coordinate coor; //marks whether hit or miss on player two's board
     coor.row = hit1[0] - 65;
     coor.col = hit1[1] - 48;
     int move = hitTarget(playerTwoBoard, coor);
 
+    printf("Next Move Coordinate: ");
+    fgets(hit2, 10, stdin);
+    write(fd2, hit2, strlen(hit2));
+    close(fd2);
     //now, mark on player one's main board whether he got a hit or miss
     int fd4;
     char *playerCheck = "pipes/pipe1"; //open another pipe to deal with the second communication
@@ -308,10 +311,7 @@ void playerTwo(){
     printf("Your Main Board:\n");
     printBoard(playerTwoMain);
     fd2 = open(playerMove, O_WRONLY);
-    printf("Next Move Coordinate: ");
-    fgets(hit2, 10, stdin);
-    write(fd2, hit2, strlen(hit2));
-    close(fd2);
+
   }
   printf("Player One Won!\n");
 }
