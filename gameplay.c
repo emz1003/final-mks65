@@ -185,7 +185,7 @@ void playerOne(){
   int fd3;
   char *playerCheck = "pipes/pipe1";
   mkfifo(playerCheck, 0666);
-  while(isWin(playerOneBoard)){
+  while(1){
     fd = open(playerMove, O_WRONLY);
     printf("Next Move Coordinate: ");
     fgets(hit1, 10, stdin);
@@ -242,8 +242,10 @@ void playerOne(){
 
   printf("Your Main Board:\n"); //show playerOne his own board
   printBoard(playerOneMain);
+  if(isWin(playerTwoBoard) || isWin(playerOneBoard)){
+      printf("Player Two Won!\n");
+      break;
 }
-  printf("Player Two Won!\n");
 }
 
 void playerTwo(){
@@ -256,7 +258,7 @@ void playerTwo(){
   char *playerCheck = "pipes/pipe1";
   mkfifo(playerCheck, 0666);
   char hit1[10], hit2[10];
-  while(isWin(playerTwoBoard)){
+  while(1){
     fd2 = open(playerMove, O_RDONLY);
     while(1){
       if(read(fd2, hit1, sizeof(hit1)) >0){
@@ -313,7 +315,9 @@ void playerTwo(){
 
     printf("Your Main Board:\n");
     printBoard(playerTwoMain);
-
+    if(isWin(playerTwoBoard) || isWin(playerOneBoard)){
+        printf("Player One Won!\n");
+        break;
+    }
   }
-  printf("Player One Won!\n");
 }

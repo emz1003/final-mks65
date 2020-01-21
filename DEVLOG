@@ -53,3 +53,8 @@ After lots of debugging, I implemented the gameplay with the pipes! Still some t
 
 emilyZ -- 2020-01-20 18:15
 update README, PROPOSAL, and reformat DEVLOG.
+
+kaitlynL -- 2020-01-20
+Spent plenty of time trying to get the mainBoards to communicate effectively
+Finally got it, had to create an entire new pipe for new information
+After lots of debugging, the game is finally functional! However, when someone wins, the program doesn't effectively exit
