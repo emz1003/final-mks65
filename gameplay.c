@@ -223,6 +223,7 @@ void playerOne(){
       if(read(fd3, check, sizeof(check)) >0 ){
         if(strchr(check, '\n')){
           *strchr(check, '\n')  = '\0';
+          break;
         }
       }
     }
@@ -283,6 +284,7 @@ void playerTwo(){
       if(read(fd4, check, sizeof(check)) >0 ){
         if(strchr(check, '\n')){
           *strchr(check, '\n')  = '\0';
+          break;
         }
       }
     }
