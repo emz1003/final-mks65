@@ -242,7 +242,7 @@ void playerOne(){
 
   printf("Your Main Board:\n"); //show playerOne his own board
   printBoard(playerOneMain);
-  if(!isWin(playerTwoBoard) || !isWin(playerOneBoard)){
+  if(!isWin(playerOneBoard)){
       printf("Player Two Won!\n");
       break;
     }
@@ -316,7 +316,7 @@ void playerTwo(){
 
     printf("Your Main Board:\n");
     printBoard(playerTwoMain);
-    if(!isWin(playerTwoBoard) || !isWin(playerOneBoard)){
+    if(!isWin(playerTwoBoard)){
         printf("Player One Won!\n");
         break;
     }
