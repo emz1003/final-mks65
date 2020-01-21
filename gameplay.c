@@ -189,19 +189,6 @@ void playerOne(){
     write(fd, hit1, strlen(hit1));
     close(fd);
 
-    fd = open(playerMove, O_RDONLY);
-    while(1){
-      if(read(fd, hit2, sizeof(hit2)) >0 ){
-          *strchr(hit2, '\n') = '\0';
-          break;
-      }
-    }
-    close(fd);
-  struct coordinate coor; //marks whether hit or miss on player one's board
-  coor.row = hit2[0] - 65;
-  coor.col = hit2[1] - 48;
-  int move = hitTarget(playerOneBoard, coor);
-
   int fd3;
   char *playerCheck = "pipes/pipe1"; //open another pipe to deal with the second communication
   mkfifo(playerCheck, 0666);
@@ -238,6 +225,19 @@ void playerOne(){
     int col = check[1] - 48;
     playerOneMain[row][col].symbol = HIT;
   }
+  //now, wait for the returning coordinate of playerTwo
+  fd = open(playerMove, O_RDONLY);
+  while(1){
+    if(read(fd, hit2, sizeof(hit2)) >0 ){
+        *strchr(hit2, '\n') = '\0';
+        break;
+    }
+  }
+  close(fd);
+  struct coordinate coor; //marks whether hit or miss on player one's board
+  coor.row = hit2[0] - 65;
+  coor.col = hit2[1] - 48;
+  int move = hitTarget(playerOneBoard, coor);
 
   printf("Your Main Board:\n"); //show playerOne his own board
   printBoard(playerOneMain);
